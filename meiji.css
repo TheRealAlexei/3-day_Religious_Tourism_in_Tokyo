@@ -1,85 +1,135 @@
-/* ==========================================
-   Meiji Jingu Deep Dive - Stylesheet
-   Theme: Washi Warm / Forest Green
-   ========================================== */
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="mj_page_title">明治神宮 Meiji Jingu | 都心森林與神聖結界</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="kanda.css">
+  <link rel="stylesheet" href="meiji.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="kanda-page mj-page">
 
-/*
-   This page loads style.css -> kanda.css -> meiji.css
-   kanda.css already sets Washi Warm base.
-   This file only adds Meiji Jingu specific overrides,
-   using deep forest green as primary accent to reflect
-   the shrine's iconic 70-hectare artificial forest.
-*/
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a href="index.html#sacred-spots" class="logo">
+        <!-- 這裡已更新為您提供的新 Logo 網址 -->
+        <img src="https://r2.image-upload.app/ptImg/WiTm39TO.png" alt="72H Tokyo Logo" class="logo-img">
+        <span class="logo-text" data-i18n="mj_back">Back to 72H</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#about" class="nav-link" data-i18n="mj_nav_about">關於明治神宮</a>
+        <a href="#cyber" class="nav-link" data-i18n="mj_nav_cyber">森林參道</a>
+        <a href="#access" class="nav-link" data-i18n="mj_nav_access">交通座標</a>
+      </nav>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+          <svg class="lang-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span class="lang-current">繁中</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button class="lang-option active" data-lang="zh-Hant">繁體中文</button></li>
+          <li><button class="lang-option" data-lang="zh-Hans">简体中文</button></li>
+          <li><button class="lang-option" data-lang="en">English</button></li>
+          <li><button class="lang-option" data-lang="vi">Tiếng Việt</button></li>
+          <li><button class="lang-option" data-lang="id">Bahasa Indonesia</button></li>
+          <li><button class="lang-option" data-lang="ja">日本語</button></li>
+          <li><button class="lang-option" data-lang="ko">한국어</button></li>
+        </ul>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-/* Forest green accent override */
-.mj-page {
-  --clr-accent: #2D6B4A;
-  --clr-accent-2: #24573C;
-}
+  <!-- ========== HERO ========== -->
+  <section class="kanda-hero">
+    <div class="kanda-hero-bg mj-bg"></div>
+    <div class="kanda-hero-content fade-in stagger-1 visible">
+      <div class="kanda-badge" data-i18n="mj_badge">鎮座百年森林</div>
+      <h1 class="kanda-title" data-i18n="mj_title">明治神宮</h1>
+      <h2 class="kanda-subtitle" data-i18n="mj_subtitle">Meiji Jingu</h2>
+      <p class="kanda-desc" data-i18n="mj_desc">供奉明治天皇與昭憲皇太后的神聖空間。從喧鬧的原宿跨過大鳥居，便是一座超過十萬棵樹木組成的人造森林，完美展現了東京「神聖與世俗」的一步之遙。</p>
+    </div>
+  </section>
 
-/* Hero background image */
-.mj-page .kanda-hero-bg.mj-bg {
-  background-image:
-    linear-gradient(to bottom, rgba(250, 247, 242, 0.2) 0%, rgba(250, 247, 242, 0.88) 100%),
-    url('https://storage.googleapis.com/p_64187c91529751506337b4e8/0de97a06-ce81-432b-98f0-f3b6a6c26ed8/%E2%91%A2.webp');
-}
+  <!-- ========== CONTENT: TRADITION x TECH ========== -->
+  <section class="section kanda-section" id="about">
+    <div class="container">
+      <div class="kanda-grid">
+        <div class="kanda-text-block fade-in stagger-2 visible">
+          <h3 class="kanda-h3" data-i18n="mj_about_h">喧鬧都市中的靜謐結界</h3>
+          <p data-i18n="mj_about_p1">原宿與表參道是東京最繁華、年輕、世俗的潮流中心。然而，僅僅穿過一座木製大鳥居，世界的聲音彷彿被瞬間抽離，取而代之的是碎石參道的沙沙聲與高聳入雲的綠意。</p>
+          <p data-i18n="mj_about_p2">這種極致的對比，是刻意為之的空間解構。走在明治神宮的參道上，是從物質世界回歸精神內在的絕佳過渡，也是體會日本神道教「敬畏自然」核心的最佳場所。</p>
+        </div>
+        <div class="kanda-image-block fade-in stagger-3 visible">
+          <img src="https://storage.googleapis.com/p_64187c91529751506337b4e8/0de97a06-ce81-432b-98f0-f3b6a6c26ed8/%E2%91%A2.webp" alt="明治神宮" class="kanda-img">
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* Badge - forest green */
-.mj-page .kanda-badge {
-  background: rgba(45, 107, 74, 0.08);
-  border-color: #2D6B4A;
-  color: #2D6B4A;
-}
+  <!-- ========== CYBER & OMAMORI ========== -->
+  <section class="section kanda-cyber-section" id="cyber">
+    <div class="container">
+      <h2 class="section-title" data-i18n="mj_exp_title">自然與信仰的體驗</h2>
+      <p class="section-lead" data-i18n="mj_exp_lead">巨木參道、清酒樽與皇室信仰</p>
+      
+      <div class="cyber-cards">
+        <div class="cyber-card fade-in stagger-1 visible">
+          <div class="cyber-icon">🌲</div>
+          <h4 data-i18n="mj_exp_1_h">鎮守之森與大鳥居</h4>
+          <p data-i18n="mj_exp_1_p">這片廣大的森林並非天然，而是由百年前日本各地捐贈的十萬棵樹苗種植而成。南參道上的大鳥居是由超過 1500 年樹齡的台灣檜木製成，莊嚴無比。</p>
+        </div>
+        <div class="cyber-card fade-in stagger-2 visible">
+          <div class="cyber-icon">🍶</div>
+          <h4 data-i18n="mj_exp_2_h">奉納酒樽牆</h4>
+          <p data-i18n="mj_exp_2_p">參道兩側擺滿了全國酒造敬獻的清酒樽，對面則是來自法國的葡萄酒桶。這展示了明治天皇積極吸收西方文化的開明，也是洋風與和魂並存的象徵。</p>
+        </div>
+        <div class="cyber-card fade-in stagger-3 visible">
+          <div class="cyber-icon">✍️</div>
+          <h4 data-i18n="mj_exp_3_h">大御心籤詩與繪馬</h4>
+          <p data-i18n="mj_exp_3_p">與一般神社占卜吉凶的籤不同，明治神宮的籤詩稱為「大御心」，內容是明治天皇或昭憲皇太后所作的短歌，為參拜者提供道德與生活上的指引。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* Section title underline uses forest green */
-.mj-page .kanda-h3::after {
-  background: #2D6B4A;
-}
+  <!-- ========== ACCESS ========== -->
+  <section class="section kanda-access" id="access">
+    <div class="container">
+      <div class="access-box fade-in stagger-1 visible">
+        <h3 class="kanda-h3" data-i18n="mj_access_h">戰略座標</h3>
+        <ul class="access-list">
+          <li><strong data-i18n="mj_access_addr_l">地址：</strong><span data-i18n="mj_access_addr_v">東京都澀谷區代代木神園町1-1</span></li>
+          <li><strong data-i18n="mj_access_trans_l">交通：</strong>
+            <ul>
+              <li data-i18n="mj_access_trans_1">JR 山手線「原宿站」步行 1 分鐘 (南參道口)</li>
+              <li data-i18n="mj_access_trans_2">東京地下鐵千代田線/副都心線「明治神宮前站」步行 1 分鐘</li>
+            </ul>
+          </li>
+          <li><strong data-i18n="mj_access_time_l">開放時間：</strong><span data-i18n="mj_access_time_v">日出至日落（每月時間不同，通常約為 5:00 - 18:00）</span></li>
+        </ul>
+        <a href="index.html#sacred-spots" class="kanda-btn" data-i18n="mj_btn_back">返回72H行程藍圖</a>
+      </div>
+    </div>
+  </section>
 
-/* Image block decorative corners: green + gold */
-.mj-page .kanda-image-block::before {
-  border-top-color: #2D6B4A;
-  border-left-color: #2D6B4A;
-}
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p data-i18n="mj_footer">72H Tokyo Strategic Blueprint &copy; 2026 Edition | Meiji Jingu Deep Dive</p>
+      </div>
+    </div>
+  </footer>
 
-/* Cards */
-.mj-page .cyber-card {
-  border-color: var(--clr-border);
-  background: var(--clr-surface);
-}
-
-/* Hover top-line: forest green -> gold -> warm brown (nature palette) */
-.mj-page .cyber-card::before {
-  background: linear-gradient(90deg, #2D6B4A, #B8860B, #8B7355);
-}
-
-.mj-page .cyber-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  border-color: #2D6B4A;
-}
-
-.mj-page .cyber-icon {
-  text-shadow: none;
-}
-
-/* Access box - forest green left border */
-.mj-page .access-box {
-  border-left-color: #2D6B4A;
-}
-
-/* Access list strong labels */
-.mj-page .access-list > li > strong {
-  color: #2D6B4A;
-}
-
-/* Return button - forest green */
-.mj-page .kanda-btn {
-  border-color: #2D6B4A;
-  color: #2D6B4A;
-}
-
-.mj-page .kanda-btn:hover {
-  background: #2D6B4A;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(45, 107, 74, 0.2);
-}
+  <script src="script.js"></script>
+</body>
+</html>
