@@ -1,85 +1,129 @@
-/* ==========================================
-   Senso-ji Deep Dive - Stylesheet
-   Theme: Washi Warm / Temple Wisteria
-   ========================================== */
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="at_page_title">淺草寺 Senso-ji | 千年信仰與下町生命力</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="kanda.css">
+  <link rel="stylesheet" href="asakusa-temple.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="kanda-page at-page">
 
-/*
-   This page loads style.css -> kanda.css -> asakusa-temple.css
-   kanda.css already sets Washi Warm base.
-   This file only adds Senso-ji (temple) specific overrides,
-   using wisteria purple as primary accent to distinguish
-   Buddhist temple from Shinto shrines.
-*/
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a href="index.html#sacred-spots" class="logo">
+        <img src="https://r2.image-upload.app/ptImg/WiTm39TO.png" alt="72H Tokyo Logo" class="logo-img">
+        <span class="logo-text" data-i18n="at_back">Back to 72H</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#about" class="nav-link" data-i18n="at_nav_about">關於淺草寺</a>
+        <a href="#cyber" class="nav-link" data-i18n="at_nav_cyber">信仰體驗</a>
+        <a href="#access" class="nav-link" data-i18n="at_nav_access">交通座標</a>
+      </nav>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+          <svg class="lang-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span class="lang-current">繁中</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button class="lang-option active" data-lang="zh-Hant">繁體中文</button></li>
+          <li><button class="lang-option" data-lang="zh-Hans">简体中文</button></li>
+          <li><button class="lang-option" data-lang="en">English</button></li>
+          <li><button class="lang-option" data-lang="vi">Tiếng Việt</button></li>
+          <li><button class="lang-option" data-lang="id">Bahasa Indonesia</button></li>
+          <li><button class="lang-option" data-lang="ja">日本語</button></li>
+          <li><button class="lang-option" data-lang="ko">한국어</button></li>
+        </ul>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-/* Temple accent override */
-.at-page {
-  --clr-accent: #7B5EA7;
-  --clr-accent-2: #6A4F91;
-}
+  <section class="kanda-hero">
+    <div class="kanda-hero-bg at-bg"></div>
+    <div class="kanda-hero-content fade-in stagger-1 visible">
+      <div class="kanda-badge" data-i18n="at_badge">建於 628 年</div>
+      <h1 class="kanda-title" data-i18n="at_title">淺草寺</h1>
+      <h2 class="kanda-subtitle" data-i18n="at_subtitle">Senso-ji</h2>
+      <p class="kanda-desc" data-i18n="at_desc">東京最古老的佛教寺院。雷門的紅燈籠與香爐裊裊升起的線香，見證了從江戶時代延續至今的下町信仰與庶民生命力。</p>
+    </div>
+  </section>
 
-/* Hero background image */
-.at-page .kanda-hero-bg.at-bg {
-  background-image:
-    linear-gradient(to bottom, rgba(250, 247, 242, 0.2) 0%, rgba(250, 247, 242, 0.88) 100%),
-    url('https://www.urielshen.com/image/catalog/02-TOURHEADM/08JAPAN/02east33/%E9%87%91%E9%BE%8D%E5%B1%B1%E6%B7%BA%E8%8D%89%E5%AF%BAM.jpg?v=1710481200');
-}
+  <section class="section kanda-section" id="about">
+    <div class="container">
+      <div class="kanda-grid">
+        <div class="kanda-text-block fade-in stagger-2 visible">
+          <h3 class="kanda-h3" data-i18n="at_about_h">從世俗走入神聖的參道</h3>
+          <p data-i18n="at_about_p1">淺草寺供奉觀音菩薩，是東京香火最鼎盛的寺廟。從地標性的「雷門」進入，穿過熱鬧的仲見世通商店街，這不僅是觀光路線，更是一條從世俗物質世界，逐步淨化心靈、走向神聖本堂的傳統參道。</p>
+          <p data-i18n="at_about_p2">本堂前的常香爐，總是被祈求健康與好運的信眾包圍。人們將線香的煙霧撲向自己身上不適的部位，這種古老的身體祈福儀式，與一旁現代化的東京晴空塔形成了強烈的時空對比。</p>
+        </div>
+        <div class="kanda-image-block fade-in stagger-3 visible">
+          <img src="https://www.urielshen.com/image/catalog/02-TOURHEADM/08JAPAN/02east33/%E9%87%91%E9%BE%8D%E5%B1%B1%E6%B7%BA%E8%8D%89%E5%AF%BAM.jpg?v=1710481200" alt="淺草寺" class="kanda-img">
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* Badge - temple wisteria */
-.at-page .kanda-badge {
-  background: rgba(123, 94, 167, 0.08);
-  border-color: #7B5EA7;
-  color: #7B5EA7;
-}
+  <section class="section kanda-cyber-section" id="cyber">
+    <div class="container">
+      <h2 class="section-title" data-i18n="at_exp_title">文化與感官的交融</h2>
+      <p class="section-lead" data-i18n="at_exp_lead">雷門、凶籤與下町美食</p>
+      
+      <div class="cyber-cards">
+        <div class="cyber-card fade-in stagger-1 visible">
+          <div class="cyber-icon">🏮</div>
+          <h4 data-i18n="at_exp_1_h">風雷神門 (雷門)</h4>
+          <p data-i18n="at_exp_1_p">淺草寺的總門，懸掛著重達 700 公煙的巨大紅燈籠。左右兩側供奉風神與雷神，是東京最具代表性的視覺標誌與結界入口。</p>
+        </div>
+        <div class="cyber-card fade-in stagger-2 visible">
+          <div class="cyber-icon">📜</div>
+          <h4 data-i18n="at_exp_2_h">觀音百籤 (高機率凶籤)</h4>
+          <p data-i18n="at_exp_2_p">淺草寺的御神籤以維持古法著稱，因此抽中「凶」的機率高達 30%。抽中凶籤不代表厄運，而是提醒人們反省，將籤詩繫在結籤架上即可將壞運留下。</p>
+        </div>
+        <div class="cyber-card fade-in stagger-3 visible">
+          <div class="cyber-icon">🍡</div>
+          <h4 data-i18n="at_exp_3_h">仲見世通商店街</h4>
+          <p data-i18n="at_exp_3_p">日本最古老的商店街之一。在參拜前後，品嚐人形燒、仙貝與炸饅頭，完美體現了日本宗教中「神聖與世俗並存」的生活哲學。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* Section title underline uses temple purple */
-.at-page .kanda-h3::after {
-  background: #7B5EA7;
-}
+  <section class="section kanda-access" id="access">
+    <div class="container">
+      <div class="access-box fade-in stagger-1 visible">
+        <h3 class="kanda-h3" data-i18n="at_access_h">戰略座標</h3>
+        <ul class="access-list">
+          <li><strong data-i18n="at_access_addr_l">地址：</strong><span data-i18n="at_access_addr_v">東京都台東區淺草2-3-1</span></li>
+          <li><strong data-i18n="at_access_trans_l">交通：</strong>
+            <ul>
+              <li data-i18n="at_access_trans_1">東京地下鐵銀座線「淺草站」步行 5 分鐘</li>
+              <li data-i18n="at_access_trans_2">都營地下鐵淺草線「淺草站」步行 5 分鐘</li>
+              <li data-i18n="at_access_trans_3">東武晴空塔線「淺草站」步行 5 分鐘</li>
+            </ul>
+          </li>
+          <li><strong data-i18n="at_access_time_l">開放時間：</strong><span data-i18n="at_access_time_v">本堂 6:00 - 17:00（10月至3月為 6:30 開門），寺內全天開放</span></li>
+        </ul>
+        <a href="index.html#sacred-spots" class="kanda-btn" data-i18n="at_btn_back">返回72H行程藍圖</a>
+      </div>
+    </div>
+  </section>
 
-/* Image block decorative corners: purple + gold */
-.at-page .kanda-image-block::before {
-  border-top-color: #7B5EA7;
-  border-left-color: #7B5EA7;
-}
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p data-i18n="at_footer">72H Tokyo Strategic Blueprint &copy; 2026 Edition | Senso-ji Deep Dive</p>
+      </div>
+    </div>
+  </footer>
 
-/* Cards */
-.at-page .cyber-card {
-  border-color: var(--clr-border);
-  background: var(--clr-surface);
-}
-
-/* Hover top-line: wisteria -> incense brown -> gold (temple palette) */
-.at-page .cyber-card::before {
-  background: linear-gradient(90deg, #7B5EA7, #8B7355, #B8860B);
-}
-
-.at-page .cyber-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  border-color: #7B5EA7;
-}
-
-.at-page .cyber-icon {
-  text-shadow: none;
-}
-
-/* Access box - temple purple left border */
-.at-page .access-box {
-  border-left-color: #7B5EA7;
-}
-
-/* Access list strong labels */
-.at-page .access-list > li > strong {
-  color: #7B5EA7;
-}
-
-/* Return button - temple purple */
-.at-page .kanda-btn {
-  border-color: #7B5EA7;
-  color: #7B5EA7;
-}
-
-.at-page .kanda-btn:hover {
-  background: #7B5EA7;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(123, 94, 167, 0.2);
-}
+  <script src="script.js"></script>
+</body>
+</html>
