@@ -1,325 +1,135 @@
-/* ==========================================
-   Kanda Myojin Deep Dive - Stylesheet
-   Theme: Washi Warm / Vermilion Shrine
-   ========================================== */
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="kanda_page_title">神田明神 Kanda Myojin | 傳統與科技的交匯</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="kanda.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="kanda-page">
 
-/* Override root variables for the Kanda page */
-:root {
-  --clr-bg: #FAF7F2;
-  --clr-surface: #FFFFFF;
-  --clr-surface-2: #F3EEE8;
-  --clr-border: rgba(60, 50, 40, 0.1);
-  --clr-text: #2C2825;
-  --clr-text-muted: #7A7570;
-  --clr-accent: #C43B3B;
-  --clr-accent-2: #D95050;
-  --clr-gold: #B8860B;
-  --clr-neon: #C43B3B;
-  --clr-shrine: #C43B3B;
-}
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a href="index.html#sacred-spots" class="logo">
+        <!-- 這裡已更新為您提供的新 Logo 網址 -->
+        <img src="https://r2.image-upload.app/ptImg/WiTm39TO.png" alt="72H Tokyo Logo" class="logo-img">
+        <span class="logo-text" data-i18n="kanda_back">Back to 72H</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#about" class="nav-link" data-i18n="kanda_nav_about">關於神田</a>
+        <a href="#cyber" class="nav-link" data-i18n="kanda_nav_cyber">賽博御守</a>
+        <a href="#access" class="nav-link" data-i18n="kanda_nav_access">交通座標</a>
+      </nav>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+          <svg class="lang-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span class="lang-current">繁中</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button class="lang-option active" data-lang="zh-Hant">繁體中文</button></li>
+          <li><button class="lang-option" data-lang="zh-Hans">简体中文</button></li>
+          <li><button class="lang-option" data-lang="en">English</button></li>
+          <li><button class="lang-option" data-lang="vi">Tiếng Việt</button></li>
+          <li><button class="lang-option" data-lang="id">Bahasa Indonesia</button></li>
+          <li><button class="lang-option" data-lang="ja">日本語</button></li>
+          <li><button class="lang-option" data-lang="ko">한국어</button></li>
+        </ul>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-body.kanda-page {
-  background: var(--clr-bg);
-  color: var(--clr-text);
-}
+  <!-- ========== HERO ========== -->
+  <section class="kanda-hero">
+    <div class="kanda-hero-bg"></div>
+    <div class="kanda-hero-content fade-in stagger-1 visible">
+      <div class="kanda-badge" data-i18n="kanda_badge">鎮座1300年</div>
+      <h1 class="kanda-title" data-i18n="kanda_title">神田明神</h1>
+      <h2 class="kanda-subtitle" data-i18n="kanda_subtitle">Kanda Myojin</h2>
+      <p class="kanda-desc" data-i18n="kanda_desc">江戶總鎮守。守護著秋葉原的繁華與科技，這裡不僅是傳統信仰的結界，更是御宅文化與IT產業的精神堡壘。</p>
+    </div>
+  </section>
 
-.kanda-page .site-header {
-  background: rgba(250, 247, 242, 0.95);
-  border-bottom: 1px solid var(--clr-border);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-}
+  <!-- ========== CONTENT: TRADITION x TECH ========== -->
+  <section class="section kanda-section" id="about">
+    <div class="container">
+      <div class="kanda-grid">
+        <div class="kanda-text-block fade-in stagger-2 visible">
+          <h3 class="kanda-h3" data-i18n="kanda_about_h">跨越千年的江戶總鎮守</h3>
+          <p data-i18n="kanda_about_p1">神田明神擁有近1300年的歷史，是東京地區最重要的神社之一。它不僅是「江戶三大祭」之一的神田祭舉辦地，更因為地處秋葉原（Akihabara）的邊緣，在現代成為了科技與傳統交匯的獨特場所。</p>
+          <p data-i18n="kanda_about_p2">從將軍到平民，再到如今的工程師、動漫迷與企業家，神田明神始終張開雙臂，包容著這座城市每一個時代的「現世祈願」。</p>
+        </div>
+        <div class="kanda-image-block fade-in stagger-3 visible">
+          <img src="https://img.shoplineapp.com/media/image_clips/683176afa80cd6000a34dceb/original.jpg?1748072110" alt="神田明神神社建築" class="kanda-img">
+        </div>
+      </div>
+    </div>
+  </section>
 
-.kanda-page .nav-link {
-  color: var(--clr-text-muted);
-}
-.kanda-page .nav-link:hover {
-  color: var(--clr-accent);
-}
-.kanda-page .nav-link::after {
-  background: var(--clr-accent);
-}
+  <!-- ========== CYBER & OMAMORI ========== -->
+  <section class="section kanda-cyber-section" id="cyber">
+    <div class="container">
+      <h2 class="section-title" data-i18n="kanda_cyber_title">科技與信仰的融合</h2>
+      <p class="section-lead" data-i18n="kanda_cyber_lead">IT情報安全守護、動漫聯名與賽博祈福</p>
+      
+      <div class="cyber-cards">
+        <div class="cyber-card fade-in stagger-1 visible">
+          <div class="cyber-icon">💻</div>
+          <h4 data-i18n="kanda_cyber_1_h">IT情報安全守護御守</h4>
+          <p data-i18n="kanda_cyber_1_p">針對現代社會的特殊需求，神田明神推出了專門保佑電腦不當機、防範病毒與資訊外洩的「IT御守」，是秋葉原工程師們的必備護身符。</p>
+        </div>
+        <div class="cyber-card fade-in stagger-2 visible">
+          <div class="cyber-icon">🌟</div>
+          <h4 data-i18n="kanda_cyber_2_h">動漫聖地巡禮</h4>
+          <p data-i18n="kanda_cyber_2_p">作為《LoveLive!》等知名動漫的取景地，神社境內掛滿了畫著精美動漫角色的「痛繪馬」，展現了八百萬神在現代二次元文化中的驚人包容力。</p>
+        </div>
+        <div class="cyber-card fade-in stagger-3 visible">
+          <div class="cyber-icon">🏢</div>
+          <h4 data-i18n="kanda_cyber_3_h">EDOCCO 文化交流館</h4>
+          <p data-i18n="kanda_cyber_3_p">境內新建的現代化設施，結合了傳統祭典展示、伴手禮商店與咖啡廳，將神道教的文化體驗以更具設計感的方式傳遞給年輕一代。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* ========== HERO ========== */
-.kanda-hero {
-  position: relative;
-  min-height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 100px 24px;
-  overflow: hidden;
-}
+  <!-- ========== ACCESS ========== -->
+  <section class="section kanda-access" id="access">
+    <div class="container">
+      <div class="access-box fade-in stagger-1 visible">
+        <h3 class="kanda-h3" data-i18n="kanda_access_h">戰略座標</h3>
+        <ul class="access-list">
+          <li><strong data-i18n="kanda_access_addr_l">地址：</strong><span data-i18n="kanda_access_addr_v">東京都千代田區外神田2-16-2</span></li>
+          <li><strong data-i18n="kanda_access_trans_l">交通：</strong>
+            <ul>
+              <li data-i18n="kanda_access_trans_1">JR 中央線/總武線「御茶之水站」步行 5 分鐘</li>
+              <li data-i18n="kanda_access_trans_2">JR 山手線/京濱東北線「秋葉原站」步行 7 分鐘</li>
+              <li data-i18n="kanda_access_trans_3">東京地下鐵銀座線「末廣町站」步行 5 分鐘</li>
+            </ul>
+          </li>
+          <li><strong data-i18n="kanda_access_time_l">開放時間：</strong><span data-i18n="kanda_access_time_v">24小時開放（御守授予所 9:00 - 17:00）</span></li>
+        </ul>
+        <a href="index.html#sacred-spots" class="kanda-btn" data-i18n="kanda_btn_back">返回72H行程藍圖</a>
+      </div>
+    </div>
+  </section>
 
-.kanda-hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.25) 0%, rgba(250, 247, 242, 0.85) 100%), url('https://img.shoplineapp.com/media/image_clips/683176afa80cd6000a34dceb/original.jpg?1748072110');
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-  transform: scale(1.05);
-  animation: slowZoom 20s linear infinite alternate;
-}
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p data-i18n="kanda_footer">72H Tokyo Strategic Blueprint &copy; 2026 Edition | Kanda Myojin Deep Dive</p>
+      </div>
+    </div>
+  </footer>
 
-@keyframes slowZoom {
-  0% { transform: scale(1.05); }
-  100% { transform: scale(1.1); }
-}
-
-.kanda-hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-}
-
-.kanda-badge {
-  display: inline-block;
-  background: rgba(196, 59, 59, 0.08);
-  border: 1px solid var(--clr-accent);
-  color: var(--clr-accent);
-  padding: 6px 16px;
-  border-radius: 30px;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  font-weight: 700;
-  margin-bottom: 24px;
-}
-
-.kanda-title {
-  font-family: var(--font-serif);
-  font-size: clamp(3rem, 8vw, 5.5rem);
-  font-weight: 900;
-  color: var(--clr-text);
-  line-height: 1.1;
-  margin-bottom: 8px;
-}
-
-.kanda-subtitle {
-  font-family: var(--font-sans);
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
-  font-weight: 300;
-  letter-spacing: 6px;
-  color: var(--clr-text-muted);
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.kanda-desc {
-  font-size: 1.05rem;
-  color: var(--clr-text-muted);
-  line-height: 1.8;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* ========== GRID CONTENT ========== */
-.kanda-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .kanda-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.kanda-text-block {
-  padding-right: 20px;
-}
-
-.kanda-h3 {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--clr-text);
-  margin-bottom: 20px;
-  position: relative;
-  display: inline-block;
-}
-
-.kanda-h3::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--clr-accent);
-}
-
-.kanda-text-block p {
-  font-size: 1rem;
-  color: var(--clr-text-muted);
-  margin-bottom: 16px;
-  line-height: 1.8;
-  text-align: justify;
-}
-
-.kanda-image-block {
-  position: relative;
-}
-
-.kanda-img {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--clr-border);
-}
-
-.kanda-image-block::before {
-  content: '';
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  width: 100px;
-  height: 100px;
-  border-top: 3px solid var(--clr-accent);
-  border-left: 3px solid var(--clr-accent);
-  z-index: 0;
-}
-
-.kanda-image-block::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  right: -15px;
-  width: 100px;
-  height: 100px;
-  border-bottom: 3px solid var(--clr-gold);
-  border-right: 3px solid var(--clr-gold);
-  z-index: 0;
-}
-
-/* ========== FEATURE CARDS (was Cyber Cards) ========== */
-.kanda-cyber-section {
-  background: var(--clr-surface-2);
-  border-top: 1px solid var(--clr-border);
-  border-bottom: 1px solid var(--clr-border);
-}
-
-.cyber-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 40px;
-}
-
-@media (max-width: 900px) {
-  .cyber-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-.cyber-card {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: 12px;
-  padding: 32px 24px;
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.cyber-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--clr-accent), var(--clr-gold), #7B5EA7);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.cyber-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  border-color: var(--clr-accent);
-}
-
-.cyber-card:hover::before {
-  opacity: 1;
-}
-
-.cyber-icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
-}
-
-.cyber-card h4 {
-  font-size: 1.1rem;
-  color: var(--clr-text);
-  margin-bottom: 12px;
-  font-family: var(--font-serif);
-}
-
-.cyber-card p {
-  font-size: 0.9rem;
-  color: var(--clr-text-muted);
-  line-height: 1.7;
-}
-
-/* ========== ACCESS ========== */
-.access-box {
-  max-width: 700px;
-  margin: 0 auto;
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-left: 4px solid var(--clr-accent);
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-}
-
-.access-list {
-  list-style: none;
-  margin: 24px 0 32px;
-  padding: 0;
-}
-
-.access-list > li {
-  margin-bottom: 16px;
-  font-size: 0.95rem;
-  color: var(--clr-text);
-  line-height: 1.6;
-}
-
-.access-list > li > strong {
-  color: var(--clr-accent);
-}
-
-.access-list ul {
-  list-style: disc;
-  margin-top: 8px;
-  padding-left: 24px;
-  color: var(--clr-text-muted);
-}
-
-.kanda-btn {
-  display: inline-block;
-  padding: 12px 30px;
-  background: transparent;
-  border: 2px solid var(--clr-accent);
-  color: var(--clr-accent);
-  font-weight: 700;
-  border-radius: 30px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  transition: all 0.3s;
-}
-
-.kanda-btn:hover {
-  background: var(--clr-accent);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(196, 59, 59, 0.2);
-}
+  <script src="script.js"></script>
+</body>
+</html>
