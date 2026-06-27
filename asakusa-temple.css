@@ -1,0 +1,85 @@
+/* ==========================================
+   Senso-ji Deep Dive - Stylesheet
+   Theme: Washi Warm / Temple Wisteria
+   ========================================== */
+
+/*
+   This page loads style.css -> kanda.css -> asakusa-temple.css
+   kanda.css already sets Washi Warm base.
+   This file only adds Senso-ji (temple) specific overrides,
+   using wisteria purple as primary accent to distinguish
+   Buddhist temple from Shinto shrines.
+*/
+
+/* Temple accent override */
+.at-page {
+  --clr-accent: #7B5EA7;
+  --clr-accent-2: #6A4F91;
+}
+
+/* Hero background image */
+.at-page .kanda-hero-bg.at-bg {
+  background-image:
+    linear-gradient(to bottom, rgba(250, 247, 242, 0.2) 0%, rgba(250, 247, 242, 0.88) 100%),
+    url('https://www.urielshen.com/image/catalog/02-TOURHEADM/08JAPAN/02east33/%E9%87%91%E9%BE%8D%E5%B1%B1%E6%B7%BA%E8%8D%89%E5%AF%BAM.jpg?v=1710481200');
+}
+
+/* Badge - temple wisteria */
+.at-page .kanda-badge {
+  background: rgba(123, 94, 167, 0.08);
+  border-color: #7B5EA7;
+  color: #7B5EA7;
+}
+
+/* Section title underline uses temple purple */
+.at-page .kanda-h3::after {
+  background: #7B5EA7;
+}
+
+/* Image block decorative corners: purple + gold */
+.at-page .kanda-image-block::before {
+  border-top-color: #7B5EA7;
+  border-left-color: #7B5EA7;
+}
+
+/* Cards */
+.at-page .cyber-card {
+  border-color: var(--clr-border);
+  background: var(--clr-surface);
+}
+
+/* Hover top-line: wisteria -> incense brown -> gold (temple palette) */
+.at-page .cyber-card::before {
+  background: linear-gradient(90deg, #7B5EA7, #8B7355, #B8860B);
+}
+
+.at-page .cyber-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: #7B5EA7;
+}
+
+.at-page .cyber-icon {
+  text-shadow: none;
+}
+
+/* Access box - temple purple left border */
+.at-page .access-box {
+  border-left-color: #7B5EA7;
+}
+
+/* Access list strong labels */
+.at-page .access-list > li > strong {
+  color: #7B5EA7;
+}
+
+/* Return button - temple purple */
+.at-page .kanda-btn {
+  border-color: #7B5EA7;
+  color: #7B5EA7;
+}
+
+.at-page .kanda-btn:hover {
+  background: #7B5EA7;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(123, 94, 167, 0.2);
+}

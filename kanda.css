@@ -1,0 +1,325 @@
+/* ==========================================
+   Kanda Myojin Deep Dive - Stylesheet
+   Theme: Washi Warm / Vermilion Shrine
+   ========================================== */
+
+/* Override root variables for the Kanda page */
+:root {
+  --clr-bg: #FAF7F2;
+  --clr-surface: #FFFFFF;
+  --clr-surface-2: #F3EEE8;
+  --clr-border: rgba(60, 50, 40, 0.1);
+  --clr-text: #2C2825;
+  --clr-text-muted: #7A7570;
+  --clr-accent: #C43B3B;
+  --clr-accent-2: #D95050;
+  --clr-gold: #B8860B;
+  --clr-neon: #C43B3B;
+  --clr-shrine: #C43B3B;
+}
+
+body.kanda-page {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+}
+
+.kanda-page .site-header {
+  background: rgba(250, 247, 242, 0.95);
+  border-bottom: 1px solid var(--clr-border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+.kanda-page .nav-link {
+  color: var(--clr-text-muted);
+}
+.kanda-page .nav-link:hover {
+  color: var(--clr-accent);
+}
+.kanda-page .nav-link::after {
+  background: var(--clr-accent);
+}
+
+/* ========== HERO ========== */
+.kanda-hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px;
+  overflow: hidden;
+}
+
+.kanda-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.25) 0%, rgba(250, 247, 242, 0.85) 100%), url('https://img.shoplineapp.com/media/image_clips/683176afa80cd6000a34dceb/original.jpg?1748072110');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transform: scale(1.05);
+  animation: slowZoom 20s linear infinite alternate;
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.1); }
+}
+
+.kanda-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.kanda-badge {
+  display: inline-block;
+  background: rgba(196, 59, 59, 0.08);
+  border: 1px solid var(--clr-accent);
+  color: var(--clr-accent);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.kanda-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  color: var(--clr-text);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.kanda-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 300;
+  letter-spacing: 6px;
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.kanda-desc {
+  font-size: 1.05rem;
+  color: var(--clr-text-muted);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========== GRID CONTENT ========== */
+.kanda-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .kanda-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kanda-text-block {
+  padding-right: 20px;
+}
+
+.kanda-h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.kanda-h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--clr-accent);
+}
+
+.kanda-text-block p {
+  font-size: 1rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 16px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.kanda-image-block {
+  position: relative;
+}
+
+.kanda-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--clr-border);
+}
+
+.kanda-image-block::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 100px;
+  height: 100px;
+  border-top: 3px solid var(--clr-accent);
+  border-left: 3px solid var(--clr-accent);
+  z-index: 0;
+}
+
+.kanda-image-block::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 100px;
+  height: 100px;
+  border-bottom: 3px solid var(--clr-gold);
+  border-right: 3px solid var(--clr-gold);
+  z-index: 0;
+}
+
+/* ========== FEATURE CARDS (was Cyber Cards) ========== */
+.kanda-cyber-section {
+  background: var(--clr-surface-2);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.cyber-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .cyber-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cyber-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--clr-accent), var(--clr-gold), #7B5EA7);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cyber-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: var(--clr-accent);
+}
+
+.cyber-card:hover::before {
+  opacity: 1;
+}
+
+.cyber-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.cyber-card h4 {
+  font-size: 1.1rem;
+  color: var(--clr-text);
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+}
+
+.cyber-card p {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+/* ========== ACCESS ========== */
+.access-box {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-left: 4px solid var(--clr-accent);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.access-list {
+  list-style: none;
+  margin: 24px 0 32px;
+  padding: 0;
+}
+
+.access-list > li {
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  color: var(--clr-text);
+  line-height: 1.6;
+}
+
+.access-list > li > strong {
+  color: var(--clr-accent);
+}
+
+.access-list ul {
+  list-style: disc;
+  margin-top: 8px;
+  padding-left: 24px;
+  color: var(--clr-text-muted);
+}
+
+.kanda-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: transparent;
+  border: 2px solid var(--clr-accent);
+  color: var(--clr-accent);
+  font-weight: 700;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.kanda-btn:hover {
+  background: var(--clr-accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(196, 59, 59, 0.2);
+}

@@ -1,0 +1,1909 @@
+﻿/* ==========================================
+   72H Tokyo Strategic Blueprint - Stylesheet
+   Washi Warm / 和紙暖白 Theme
+   ========================================== */
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* --- Washi Warm: 和紙暖白多色調 --- */
+  --clr-bg: #FAF7F2;
+  --clr-surface: #FFFFFF;
+  --clr-surface-2: #F3EEE8;
+  --clr-border: rgba(60, 50, 40, 0.1);
+  --clr-text: #2C2825;
+  --clr-text-muted: #7A7570;
+  --clr-accent: #C43B3B;
+  --clr-accent-2: #D95050;
+  --clr-gold: #B8860B;
+  --clr-neon: #C43B3B;
+  --clr-incense: #8B7355;
+  --clr-shrine: #C43B3B;
+  --clr-temple: #7B5EA7;
+  --clr-food: #D4880E;
+  --clr-sport: #3A8A68;
+  --clr-eco: #2E7D96;
+  --font-sans: 'Noto Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Noto Serif TC', serif;
+  --max-w: 1200px;
+  --header-h: 64px;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--clr-accent);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover { color: var(--clr-neon); }
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(250, 247, 242, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--clr-border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  height: var(--header-h);
+}
+
+.header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--clr-text);
+  text-decoration: none;
+}
+.logo:hover { color: var(--clr-accent); }
+.logo:hover .logo-img {
+  box-shadow: 0 2px 12px rgba(224, 96, 62, 0.18);
+}
+.logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  background: var(--clr-surface);
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s;
+}
+.logo-text {
+  color: var(--clr-text);
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.logo:hover .logo-text {
+  color: var(--clr-accent);
+}
+
+.main-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  color: var(--clr-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 4px 0;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--clr-accent);
+  transition: width 0.3s;
+}
+.nav-link:hover { color: var(--clr-text); }
+.nav-link:hover::after { width: 100%; }
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--clr-text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ---------- Language Dropdown ---------- */
+.lang-dropdown {
+  position: relative;
+  z-index: 100;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--clr-text);
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+  white-space: nowrap;
+}
+.lang-btn:hover {
+  border-color: var(--clr-accent);
+  background: var(--clr-surface);
+}
+
+.lang-icon {
+  flex-shrink: 0;
+}
+
+.lang-chevron {
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.lang-dropdown.open .lang-chevron {
+  transform: rotate(180deg);
+}
+
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: auto;
+  right: 0;
+  min-width: 140px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 10px;
+  padding: 6px 0;
+  list-style: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0,0.1);
+  overflow: hidden;
+}
+
+.lang-dropdown.open .lang-menu {
+  display: block;
+  animation: langFadeIn 0.2s ease;
+}
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  color: var(--clr-text-muted);
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-option:hover {
+  background: rgba(196, 59, 59, 0.05);
+  color: var(--clr-text);
+}
+.lang-option.active {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+.lang-option.active::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #2C2420;
+  overflow: hidden;
+}
+
+/* Video background */
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Sunset tint overlay on top of video */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(251, 232, 200, 0.25) 0%,
+      rgba(224, 144, 96, 0.2) 30%,
+      rgba(160, 90, 110, 0.35) 60%,
+      rgba(61, 47, 82, 0.7) 100%
+    );
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+}
+
+.hero-tag {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 24px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+  -webkit-text-fill-color: unset;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 400;
+  color: #FCDCB4;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+}
+.hero-cta:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #4A3040;
+  border-color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Sections ---------- */
+section[id], .religion-section[id], div[id] {
+  scroll-margin-top: 100px;
+}
+.section {
+  padding: 100px 0;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  color: inherit;
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--clr-accent);
+  margin: 16px auto 0;
+}
+
+.section-lead {
+  text-align: center;
+  color: inherit;
+  opacity: 0.7;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+
+/* ===== Section Color Zones: Sunset → Night narrative ===== */
+
+/* --- Intro: 接續 Hero 暮色，深暖底 --- */
+.section-intro {
+  background: linear-gradient(180deg, #3D2F52 0%, #463A54 40%, #4A3D50 100%);
+  color: #F0EAE0;
+}
+.section-intro .section-title::after { background: #FCDCB4; }
+
+/* --- Itinerary: 暖米色呼吸區 --- */
+.section-itinerary {
+  background: #FAF7F2;
+  color: var(--clr-text);
+}
+
+/* --- Themes: 深棕暖色文化帶 --- */
+.section-themes {
+  background: linear-gradient(180deg, #3E302A 0%, #44352E 50%, #3E302A 100%);
+  color: #F0EAE0;
+}
+.section-themes .section-title::after { background: #D4880E; }
+
+/* --- Mapping: 暖米回歸 --- */
+.section-mapping {
+  padding: 80px 0;
+  background: #FAF7F2;
+  color: var(--clr-text);
+}
+
+/* --- Budget: 淡灰米 --- */
+.section-budget {
+  background: #F3EEE8;
+  color: var(--clr-text);
+}
+
+/* --- Team: 暖白 --- */
+.section-team {
+  background: #FAF7F2;
+  color: var(--clr-text);
+}
+
+/* --- Closing: 回到黃昏 → 暮色 --- */
+.section-closing {
+  text-align: center;
+  padding: 120px 0;
+  background:
+    linear-gradient(180deg, #FAF7F2 0%, #EDB07A 25%, #C97060 50%, #A05A6E 75%, #4A3D50 100%);
+  color: #F0EAE0;
+}
+
+/* --- Footer: 深暖收尾 --- */
+.site-footer {
+  background: #342C28;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 48px 0 24px;
+  color: #D4C8BC;
+}
+
+/* ---------- Core Areas ---------- */
+.core-areas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.area-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 28px 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.area-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(252, 220, 180, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.area-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.area-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: #F0EAE0;
+}
+
+.area-card p {
+  font-size: 0.8rem;
+  color: rgba(240, 234, 224, 0.6);
+}
+
+.dual-track {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.track {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.track h4 {
+  color: #FCDCB4;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.track p {
+  font-size: 0.9rem;
+  color: rgba(240, 234, 224, 0.65);
+}
+
+/* ---------- Itinerary ---------- */
+.section-itinerary .section-lead { opacity: 1; color: var(--clr-text-muted); }
+
+.map-container {
+  margin-bottom: 48px;
+  background: var(--clr-surface);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+  padding: 4px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0,0.08);
+}
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#tokyo-topology-map {
+  height: 720px;
+  width: 100%;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* Map header inside itinerary section */
+.map-header {
+  text-align: center;
+  padding: 20px 20px 0;
+}
+.map-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--clr-text);
+  margin: 0 0 8px;
+  letter-spacing: 1.5px;
+}
+.map-subtitle {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* Floating home button */
+.home-floating-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--clr-border);
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  color: var(--clr-text);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.home-floating-btn:hover {
+  background: var(--clr-surface-2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+.home-floating-btn:active {
+  transform: translateY(0);
+}
+
+/* Leaflet route marker system */
+.map-marker-shell {
+  background: transparent;
+  border: 0;
+}
+
+.map-marker-pin {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: var(--pin-color);
+  border:  solid #2a2a35;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.22), 0 0 0 4px color-mix(in srgb, var(--pin-color), transparent 78%);
+}
+
+.map-marker-pin span {
+  transform: rotate(45deg);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.map-marker-base {
+  border-radius: 8px 8px 8px 0;
+}
+
+.map-marker-shrine,
+.map-marker-temple {
+  box-shadow: 0 8px 20px rgba(180, 83, 9, 0.28), 0 0 0 4px rgba(255, 237, 213, 0.84);
+}
+
+/* Leaflet popup overrides - card style with image */
+.map-custom-popup .leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0,0.2) !important;
+  font-family: var(--font-sans);
+}
+.map-custom-popup .leaflet-popup-content {
+  margin: 0 !important;
+  width: 300px !important;
+}
+.map-custom-popup .leaflet-popup-tip {
+  background: var(--clr-surface);
+}
+.map-popup-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+.map-popup-card-body {
+  padding: 18px;
+}
+.map-popup-title {
+  font-weight: 800;
+  font-size: 17px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+}
+.map-popup-yamanote { color: #2A5CAA; }
+.map-popup-shitamachi { color: #E85D3E; }
+.map-popup-transit { color: #6B7280; }
+.map-popup-shrine { color: #B45309; }
+.map-popup-temple { color: #7C3AED; }
+.map-popup-landmark { color: #2A5CAA; }
+.map-popup-base { color: var(--clr-text); }
+.map-popup-food { color: #D97706; }
+
+/* Popup badge */
+.map-popup-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.map-badge-yamanote { background: #2A5CAA; }
+.map-badge-shitamachi { background: #E85D3E; }
+.map-badge-transit { background: #6B7280; }
+.map-badge-shrine { background: #B45309; }
+.map-badge-temple { background: #7C3AED; }
+.map-badge-landmark { background: #2A5CAA; }
+.map-badge-base { background: var(--clr-text); }
+.map-badge-food { background: #D97706; }
+
+.map-popup-meta {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+  color: var(--clr-text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.map-popup-desc {
+  font-size: 13px;
+  color: var(--clr-text);
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Map legend */
+.map-legend {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--clr-text);
+  line-height: 1.7;
+  border: 1px solid var(--clr-border);
+}
+.map-legend-heading {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--clr-border);
+}
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3px;
+}
+.map-legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.map-legend-line {
+  width: 22px;
+  height: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.map-legend-line-dash {
+  height: 0;
+  background: transparent !important;
+  border-top: 4px dashed #5F6C7B;
+  color: #5F6C7B;
+}
+
+.map-legend-diamond {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #FFE8A3, #D4AF37 55%, #8A5A00);
+  border:  solid #2a2a35;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 1px rgba(138, 90, 0, 0.32);
+}
+
+.map-scale-hint {
+  max-width: 300px;
+  padding: 10px 13px;
+  background: rgba(44, 40, 37, 0.88);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.tokyo-macro-shell {
+  background: transparent;
+  border: 0;
+}
+
+.tokyo-macro-diamond {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border:  solid #2a2a35;
+  background: linear-gradient(135deg, #FFF4BC 0%, #D4AF37 52%, #7A4D00 100%);
+  color: #1F2937;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.22), 0 16px 34px rgba(0, 0, 0,0.3);
+  cursor: pointer;
+}
+
+.tokyo-macro-diamond span {
+  display: block;
+  transform: rotate(-45deg);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.map-note {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  color: var(--clr-text-muted);
+  text-align: center;
+}
+
+.day-block {
+  margin-bottom: 48px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 28px;
+  background: var(--clr-surface-2);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.day-num {
+  background: var(--clr-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+}
+
+.day-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--clr-text);
+}
+
+.day-content {
+  padding: 28px;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 48px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(196, 59, 59, 0.15);
+}
+
+.tl-item {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+
+.tl-icon {
+  position: absolute;
+  left: -48px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: var(--clr-surface);
+  border: 2px solid var(--clr-border);
+  z-index: 1;
+}
+.tl-icon.transport { border-color: var(--clr-eco); }
+.tl-icon.meal { border-color: var(--clr-food); }
+.tl-icon.explore { border-color: var(--clr-accent); }
+.tl-icon.base { border-color: var(--clr-gold); }
+.tl-icon.tip { border-color: var(--clr-sport); }
+
+/* Inline food recommendations inside timeline body */
+.tl-reco {
+  margin: 10px 0;
+  border: 1px solid var(--clr-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--clr-surface-2);
+}
+.tl-reco-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  font-size: 0.82rem;
+  color: var(--clr-text-muted);
+  line-height: 1.45;
+}
+.tl-reco-item + .tl-reco-item {
+  border-top: 1px solid var(--clr-border);
+}
+.tl-reco-tag {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 10px;
+  background: rgba(212, 136, 14, 0.1);
+  color: var(--clr-food);
+  white-space: nowrap;
+}
+.tl-reco-text {
+  flex: 1;
+  min-width: 0;
+}
+.tl-reco-price {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--clr-gold);
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .tl-reco-item { flex-wrap: wrap; gap: 3px 8px; }
+  .tl-reco-text { flex-basis: 100%; order: 3; }
+}
+
+.tl-body h4 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+  color: var(--clr-text);
+}
+
+.tl-body p {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 8px;
+}
+
+.tabelog-link {
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #E85D3E;
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.tabelog-link:hover {
+  background-color: #C43B3B;
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.tag-transport { background: rgba(46, 125, 150, 0.1); color: var(--clr-eco); }
+.tag-food { background: rgba(212, 136, 14, 0.1); color: var(--clr-food); }
+.tag-culture { background: rgba(196, 59, 59, 0.1); color: var(--clr-accent); }
+.tag-stay { background: rgba(184, 134, 11, 0.1); color: var(--clr-gold); }
+.tag-tip { background: rgba(58, 138, 104, 0.1); color: var(--clr-sport); }
+
+/* ---------- Themes ---------- */
+.section-themes .section-lead { opacity: 1; color: rgba(240, 234, 224, 0.65); }
+
+/* Religion Deep Dive */
+.religion-deep-dive {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.religion-hero-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--clr-temple);
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.religion-hero-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.religion-hero-icon {
+  font-size: 3rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(123, 94, 167, 0.1), rgba(196, 59, 59, 0.06));
+  border-radius: 16px;
+  border: 1px solid rgba(123, 94, 167, 0.15);
+}
+
+.religion-hero-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #F0EAE0;
+  margin-bottom: 2px;
+}
+
+.religion-hero-header .theme-subtitle {
+  font-size: 0.95rem;
+  color: #D4A0D0;
+  font-weight: 500;
+}
+
+.religion-hero-intro {
+  font-size: 1rem;
+  color: rgba(240, 234, 224, 0.7);
+  line-height: 1.9;
+  text-align: justify;
+}
+
+/* Religion section blocks */
+.religion-section {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.religion-section-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #F0EAE0;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 16px;
+}
+.religion-section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--clr-shrine), var(--clr-temple));
+}
+
+.religion-section-desc {
+  font-size: 0.9rem;
+  color: rgba(240, 234, 224, 0.6);
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
+
+/* Religion lifecycle */
+.religion-lifecycle {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.lifecycle-item {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.lifecycle-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.lc-label {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.lifecycle-item:nth-child(1) .lc-label { background: var(--clr-shrine); color: #fff; }
+.lifecycle-item:nth-child(2) .lc-label { background: var(--clr-gold); color: #fff; }
+.lifecycle-item:nth-child(3) .lc-label { background: var(--clr-temple); color: #fff; }
+
+.lifecycle-item p {
+  font-size: 0.85rem;
+  color: rgba(240, 234, 224, 0.65);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Comparison table - expanded */
+.compare-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.compare-col {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.3s;
+}
+.compare-col:hover {
+  transform: translateY(-2px);
+}
+
+.compare-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.compare-icon {
+  font-size: 1.5rem;
+}
+
+.compare-col h4 {
+  font-size: 1rem;
+  margin-bottom: 0;
+  color: var(--clr-gold);
+  font-weight: 700;
+}
+
+.compare-shinto .compare-header { border-bottom-color: var(--clr-shrine); }
+.compare-shinto h4 { color: #E88080; }
+.compare-buddhism .compare-header { border-bottom-color: var(--clr-temple); }
+.compare-buddhism h4 { color: #D4A0D0; }
+
+.compare-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.compare-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: rgba(240, 234, 224, 0.65);
+  line-height: 1.5;
+}
+.compare-list li:last-child { border-bottom: none; }
+
+.compare-col p {
+  font-size: 0.85rem;
+  color: rgba(240, 234, 224, 0.65);
+  line-height: 1.6;
+}
+
+/* Religion spots grid */
+.religion-spots-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.religion-spot-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  border-left: 3px solid transparent;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.religion-spot-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.religion-spot-card.spot-shrine {
+  border-left-color: var(--clr-shrine);
+}
+.religion-spot-card.spot-temple {
+  border-left-color: var(--clr-temple);
+}
+
+.spot-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.spot-shrine .spot-badge {
+  background: rgba(196, 59, 59, 0.2);
+  color: #E88080;
+}
+.spot-temple .spot-badge {
+  background: rgba(123, 94, 167, 0.2);
+  color: #D4A0D0;
+}
+
+.religion-spot-card h5 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #F0EAE0;
+  margin-bottom: 4px;
+}
+
+.spot-location {
+  font-size: 0.75rem;
+  color: rgba(240, 234, 224, 0.5);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.spot-desc {
+  font-size: 0.85rem;
+  color: rgba(240, 234, 224, 0.65);
+  line-height: 1.7;
+}
+
+/* Spot Image Hover Effects */
+.spot-kanda, .spot-asakusa-shrine, .spot-asakusa-temple, .spot-meiji {
+  position: relative;
+  overflow: hidden;
+}
+
+.spot-kanda::before, .spot-asakusa-shrine::before, .spot-asakusa-temple::before, .spot-meiji::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 0;
+}
+
+.spot-kanda::before {
+  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://img.shoplineapp.com/media/image_clips/683176afa80cd6000a34dceb/original.jpg?1748072110');
+}
+
+.spot-asakusa-shrine::before {
+  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://e-asakusa.jp/wp-content/uploads/AsakusaJinja1-1024x768.jpg');
+}
+
+.spot-asakusa-temple::before {
+  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://www.urielshen.com/image/catalog/02-TOURHEADM/08JAPAN/02east33/%E9%87%91%E9%BE%8D%E5%B1%B1%E6%B7%BA%E8%8D%89%E5%AF%BAM.jpg?v=1710481200');
+}
+
+.spot-meiji::before {
+  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://storage.googleapis.com/p_64187c91529751506337b4e8/0de97a06-ce81-432b-98f0-f3b6a6c26ed8/%E2%91%A2.webp');
+}
+
+.spot-kanda:hover::before, .spot-asakusa-shrine:hover::before, .spot-asakusa-temple:hover::before, .spot-meiji:hover::before {
+  transform: translateY(0);
+}
+
+.spot-kanda > *, .spot-asakusa-shrine > *, .spot-asakusa-temple > *, .spot-meiji > * {
+  position: relative;
+  z-index: 1;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.spot-kanda:hover h5, .spot-asakusa-shrine:hover h5, .spot-asakusa-temple:hover h5, .spot-meiji:hover h5,
+.spot-kanda:hover .spot-location, .spot-asakusa-shrine:hover .spot-location, .spot-asakusa-temple:hover .spot-location, .spot-meiji:hover .spot-location,
+.spot-kanda:hover .spot-desc, .spot-asakusa-shrine:hover .spot-desc, .spot-asakusa-temple:hover .spot-desc, .spot-meiji:hover .spot-desc {
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0,0.8);
+}
+
+.spot-kanda:hover .spot-badge, .spot-asakusa-shrine:hover .spot-badge, .spot-meiji:hover .spot-badge {
+  background: rgba(196, 59, 59, 0.9);
+  color: #fff;
+}
+
+.spot-asakusa-temple:hover .spot-badge {
+  background: rgba(123, 94, 167, 0.9);
+  color: #fff;
+}
+
+/* Religion insight / blockquote */
+.religion-insight {
+  margin-top: 8px;
+  padding: 0;
+}
+
+.religion-insight blockquote {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid var(--clr-temple);
+  border-radius: 12px;
+  padding: 28px 32px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: #F0EAE0;
+  line-height: 2;
+  font-style: italic;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.religion-insight blockquote::before {
+  content: '\201C';
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-size: 3rem;
+  color: rgba(212, 160, 208, 0.15);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ---------- Quadrant Chart ---------- */
+
+.quadrant-chart {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quadrant-axis-y {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  left: 50%;
+  background: rgba(44, 40, 37, 0.15);
+}
+
+.axis-label-top,
+.axis-label-bottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.axis-label-top { top: -30px; }
+.axis-label-bottom { bottom: -30px; }
+
+.quadrant-axis-x {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(44, 40, 37, 0.15);
+}
+
+.axis-label-left,
+.axis-label-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+  letter-spacing: 1px;
+}
+.axis-label-left { left: -40px; }
+.axis-label-right { right: -40px; }
+
+.quadrant-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.q-item {
+  position: absolute;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.q-item:hover {
+  transform: scale(1.05);
+  border-color: var(--clr-accent);
+}
+
+.q-item strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: var(--clr-text);
+}
+.q-item span {
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+}
+
+.q-tl { top: 10%; left: 5%; }
+.q-tc { top: 15%; left: 35%; }
+.q-tr { top: 10%; right: 5%; }
+.q-br { bottom: 10%; right: 5%; }
+
+/* ---------- Budget ---------- */
+.section-budget .section-lead { opacity: 1; color: var(--clr-text-muted); }
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.budget-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.budget-card h4 {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--clr-border);
+  color: var(--clr-text);
+}
+
+.budget-card.fixed h4 { border-bottom-color: var(--clr-eco); }
+.budget-card.variable h4 { border-bottom-color: var(--clr-gold); }
+.budget-card.total h4 { border-bottom-color: var(--clr-accent); }
+
+.budget-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--clr-border);
+  font-size: 0.9rem;
+  color: var(--clr-text);
+}
+.budget-item:last-child { border-bottom: none; }
+
+.budget-val {
+  font-weight: 600;
+  color: var(--clr-gold);
+}
+
+.budget-total {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.total-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+}
+
+.total-note {
+  font-size: 0.8rem;
+  color: var(--clr-text-muted);
+}
+
+.budget-philosophy {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+/* ---------- Team ---------- */
+.section-team .section-lead { opacity: 1; color: var(--clr-text-muted); }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.team-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  padding: 36px 20px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.team-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--clr-accent);
+}
+
+.team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.team-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--clr-text);
+}
+
+.team-card p {
+  font-size: 0.8rem;
+  color: var(--clr-text-muted);
+}
+
+/* ---------- Closing ---------- */
+.closing-visual {
+  margin-bottom: 40px;
+}
+
+.taichi {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.taichi-red,
+.taichi-black {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.taichi-red {
+  background: rgba(196, 59, 59, 0.08);
+  border: 2px solid var(--clr-accent);
+  margin-right: -20px;
+}
+
+.taichi-black {
+  background: rgba(123, 94, 167, 0.06);
+  border: 2px solid var(--clr-temple);
+  margin-left: -20px;
+}
+
+.taichi-red span { color: var(--clr-accent); font-size: 1.1rem; }
+.taichi-black span { color: var(--clr-temple); font-size: 1.1rem; }
+.taichi-red small,
+.taichi-black small {
+  font-size: 0.65rem;
+  color: var(--clr-text-muted);
+  margin-top: 4px;
+}
+
+.closing-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  color: #F0EAE0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.closing-text {
+  font-size: 1rem;
+  color: rgba(240, 234, 224, 0.8);
+  margin-bottom: 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.closing-quote {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: rgba(252, 220, 180, 0.85);
+  font-style: italic;
+  line-height: 1.8;
+  max-width: 550px;
+  margin: 0 auto 32px;
+}
+
+.closing-cta {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FCDCB4;
+  letter-spacing: 2px;
+}
+
+/* ---------- Footer ---------- */
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.footer-brand {
+  margin-bottom: 28px;
+}
+
+.lhu-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #D4880E;
+  letter-spacing: 2px;
+}
+
+.footer-logo-img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  background: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-course {
+  font-size: 0.9rem;
+  color: rgba(212, 200, 188, 0.7);
+  margin-top: 8px;
+}
+
+.footer-members {
+  font-size: 0.85rem;
+  color: rgba(212, 200, 188, 0.7);
+  margin-top: 4px;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(212, 200, 188, 0.7);
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  transition: all 0.3s;
+}
+.social-link:hover {
+  color: #FCDCB4;
+  border-color: rgba(252, 220, 180, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-bottom p {
+  font-size: 0.75rem;
+  color: rgba(212, 200, 188, 0.5);
+  letter-spacing: 1px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .core-areas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .budget-grid {
+    grid-template-columns: 1fr;
+  }
+  .dual-track {
+    grid-template-columns: 1fr;
+  }
+  .religion-lifecycle {
+    flex-direction: column;
+  }
+  .compare-table {
+    grid-template-columns: 1fr;
+  }
+  .religion-spots-grid {
+    grid-template-columns: 1fr;
+  }
+  .religion-hero-card {
+    padding: 28px 24px;
+  }
+  .religion-section {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .core-areas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .core-areas .area-card:last-child {
+    grid-column: span 2;
+  }
+
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: rgba(250, 247, 242, 0.98);
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
+    border-bottom: 1px solid var(--clr-border);
+  }
+  .main-nav.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .lang-dropdown {
+    margin-left: auto;
+    margin-right: 12px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .taichi-red,
+  .taichi-black {
+    width: 110px;
+    height: 110px;
+  }
+
+  .quadrant-chart {
+    display: none;
+  }
+
+  .map-container {
+    border-radius: 12px;
+    padding: 3px;
+  }
+
+  .map-header {
+    padding: 18px 14px 2px;
+  }
+
+  .map-header h3 {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .map-subtitle {
+    font-size: 0.78rem;
+    text-align: left;
+  }
+
+  #tokyo-topology-map {
+    height: 540px;
+  }
+
+  .home-floating-btn {
+    right: 14px;
+    bottom: 18px;
+    padding: 10px 14px;
+    max-width: calc(100% - 28px);
+    font-size: 12px;
+  }
+
+  .map-legend {
+    max-width: 220px;
+    font-size: 11px;
+    padding: 10px;
+  }
+
+  .map-scale-hint {
+    display: none;
+  }
+
+  .footer-social {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .day-content {
+    padding: 20px 16px;
+  }
+
+  .timeline {
+    padding-left: 40px;
+  }
+
+  .tl-icon {
+    left: -40px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ---------- Scroll Animations ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for grouped elements */
+.fade-in.stagger-1 { transition-delay: 0.08s; }
+.fade-in.stagger-2 { transition-delay: 0.16s; }
+.fade-in.stagger-3 { transition-delay: 0.24s; }
+.fade-in.stagger-4 { transition-delay: 0.32s; }
+.fade-in.stagger-5 { transition-delay: 0.40s; }
+.fade-in.stagger-6 { transition-delay: 0.48s; }

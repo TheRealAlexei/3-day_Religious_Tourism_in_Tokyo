@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>72H Tokyo Strategic Blueprint | 霓虹與線香的雙重濾鏡</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========== HEADER / NAVBAR ========== -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <img src="images/mlogo.png" alt="72H Tokyo Logo" class="logo-img">
+        <span class="logo-text">72H Tokyo</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#itinerary" class="nav-link" data-i18n="nav_itinerary">行程介紹</a>
+        <a href="#themes" class="nav-link" data-i18n="nav_themes">主題</a>
+        <a href="#budget" class="nav-link" data-i18n="nav_budget">經費</a>
+        <a href="#team" class="nav-link" data-i18n="nav_team">團隊介紹</a>
+      </nav>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+          <svg class="lang-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span class="lang-current">繁中</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button class="lang-option active" data-lang="zh-Hant">繁體中文</button></li>
+          <li><button class="lang-option" data-lang="zh-Hans">简体中文</button></li>
+          <li><button class="lang-option" data-lang="en">English</button></li>
+          <li><button class="lang-option" data-lang="vi">Tiếng Việt</button></li>
+          <li><button class="lang-option" data-lang="id">Bahasa Indonesia</button></li>
+          <li><button class="lang-option" data-lang="ja">日本語</button></li>
+          <li><button class="lang-option" data-lang="ko">한국어</button></li>
+        </ul>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://www.image2url.com/r2/default/videos/1781447688289-1cb6a928-f030-46f4-8b36-6e691519fa06.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-tag" data-i18n="hero_tag">Tokyo Strategic Blueprint / 2026 Edition</p>
+      <h1 class="hero-title" data-i18n="hero_title">72小時東京極效週末</h1>
+      <h2 class="hero-subtitle" data-i18n="hero_subtitle">霓虹與線香的雙重濾鏡</h2>
+      <p class="hero-desc" data-i18n="hero_desc">空間解構與文化導覽：從神佛習合的底蘊，重新定義東京極大化體驗</p>
+      <a href="#itinerary" class="hero-cta" data-i18n="hero_cta">探索行程 &darr;</a>
+    </div>
+  </section>
+
+  <!-- ========== INTRO: CORE 5 AREAS ========== -->
+  <section class="section section-intro" id="intro">
+    <div class="container">
+      <h2 class="section-title" data-i18n="intro_title">捨棄冗餘，提煉文化核心</h2>
+      <p class="section-lead" data-i18n="intro_lead">將傳統 5 日行程中過爛的鋪陳點俐落捨棄，保留五大核心區域。真正的極致旅遊不在於打卡數量，而在於「看懂」這座城市。</p>
+      <div class="core-areas">
+        <div class="area-card">
+          <div class="area-icon">&#x26A1;</div>
+          <h3 data-i18n="area_akiba">秋葉原</h3>
+          <p data-i18n="area_akiba_desc">科技霓虹・次元文化</p>
+        </div>
+        <div class="area-card">
+          <div class="area-icon">&#x26E9;</div>
+          <h3 data-i18n="area_asakusa">淺草</h3>
+          <p data-i18n="area_asakusa_desc">千年古寺・下町風情</p>
+        </div>
+        <div class="area-card">
+          <div class="area-icon">&#x1F3DB;</div>
+          <h3 data-i18n="area_ueno">上野</h3>
+          <p data-i18n="area_ueno_desc">文化殿堂・庶民市場</p>
+        </div>
+        <div class="area-card">
+          <div class="area-icon">&#x1F307;</div>
+          <h3 data-i18n="area_shibuya">澀谷</h3>
+          <p data-i18n="area_shibuya_desc">潮流十字・年輕脈動</p>
+        </div>
+        <div class="area-card">
+          <div class="area-icon">&#x1F303;</div>
+          <h3 data-i18n="area_shinjuku">新宿</h3>
+          <p data-i18n="area_shinjuku_desc">不夜城市・極致夜景</p>
+        </div>
+      </div>
+      <div class="dual-track">
+        <div class="track">
+          <h4 data-i18n="track1_title">精準物流動線</h4>
+          <p data-i18n="track1_desc">以 JR 山手線為軸心，最小化交通時間，最大化體驗密度。</p>
+        </div>
+        <div class="track">
+          <h4 data-i18n="track2_title">心靈文化導覽</h4>
+          <p data-i18n="track2_desc">穿梭於現代科技感與傳統線香之中，雙軌藍圖無縫疊加。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ITINERARY ========== -->
+  <section class="section section-itinerary" id="itinerary">
+    <div class="container">
+      <h2 class="section-title" data-i18n="itin_title">72 小時行程總覽</h2>
+      <p class="section-lead" data-i18n="itin_lead">從降落到撤退，每一刻都經過精密計算。</p>
+
+      <!-- Interactive Map -->
+      <div class="map-container">
+        <div class="map-header">
+          <h3 data-i18n="map_heading">72 小時旅遊地圖：線香、霓虹與回東京座標</h3>
+          <p class="map-subtitle" data-i18n="map_subtitle">高亮 Day 1-3 路線，標記神田明神、淺草神社、上野東照宮、明治神宮與主要地標；縮小到日本尺度時可點金色菱形回到東京。</p>
+        </div>
+        <div class="map-wrapper">
+          <div id="tokyo-topology-map"></div>
+          <button class="home-floating-btn" onclick="returnToTokyo()" title="返回東京鳥瞰視角">
+            <span>🗼</span> <span data-i18n="map_btn_home">回到東京原點</span>
+          </button>
+        </div>
+        <p class="map-note" data-i18n="map_note">* 地圖標示 72 小時高亮路線、神社寺院、知名地標、交通節點與國土尺度東京錨點</p>
+      </div>
+
+      <!-- Day 1 -->
+      <div class="day-block">
+        <div class="day-header">
+          <span class="day-num">Day 1</span>
+          <span class="day-title" data-i18n="d1_title">降落與科技霓虹之夜</span>
+        </div>
+        <div class="day-content">
+          <div class="timeline">
+            <!-- Transport -->
+            <div class="tl-item">
+              <div class="tl-icon transport">&#x2708;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d1_t1_h">抵達成田機場 (NRT)</h4>
+                <p data-i18n="d1_t1_p">搭乘 <strong>Skyliner</strong>（單程約 &yen;2,570，41 分鐘）直達日暮里，無縫轉乘 JR 山手線抵達秋葉原。</p>
+                <span class="tag tag-transport" data-i18n="tag_transport">交通</span>
+              </div>
+            </div>
+            <!-- Base -->
+            <div class="tl-item">
+              <div class="tl-icon base">&#x1F3E8;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d1_t2_h">戰略基地建置</h4>
+                <p data-i18n="d1_t2_p">東京都千代田區神田佐久間町。完美卡位 JR 山手線與地鐵交通樞紐，節省每日往返通勤的隱形成本。</p>
+                <span class="tag tag-stay" data-i18n="tag_stay">住宿</span>
+              </div>
+            </div>
+            <!-- Akihabara -->
+            <div class="tl-item">
+              <div class="tl-icon explore">&#x26A1;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d1_t3_h">秋葉原探索</h4>
+                <p data-i18n="d1_t3_p">卸下行李後，直奔日本最大電器街與動漫聖地。感受東京獨有的都市叢林與高畫質霓虹。每一種小眾狂熱都有其歸屬 —— 這正是「八百萬神」在現代文化中的變體延伸。</p>
+                <span class="tag tag-culture" data-i18n="tag_culture">文化</span>
+              </div>
+            </div>
+            <!-- Dinner -->
+            <div class="tl-item">
+              <div class="tl-icon meal">&#x1F37A;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d1_t4_h">晚餐：在地居酒屋 / 連鎖定食</h4>
+                <p data-i18n="d1_t4_p">快速補給體力。預算 &yen;1,500~3,500。</p>
+                <a href="https://tabelog.com/tw/aichi/A2301/A230101/23078290/" target="_blank" rel="noopener" class="tabelog-link">新時代44</a><br>
+                <span class="tag tag-food" data-i18n="tag_food">餐飲</span>
+              </div>
+            </div>
+            <!-- Pro-tip -->
+            <div class="tl-item">
+              <div class="tl-icon tip">&#x1F4A1;</div>
+              <div class="tl-body">
+                <h4>Pro-tip</h4>
+                <p data-i18n="d1_t5_p">購買 <strong>Suica</strong> 或 1日/2日地鐵券（約 &yen;600~800），為接下來的高密度移動建立運作基礎。</p>
+                <span class="tag tag-tip" data-i18n="tag_tip">小提示</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-block">
+        <div class="day-header">
+          <span class="day-num">Day 2</span>
+          <span class="day-title" data-i18n="d2_title">神聖與世俗的完整一日</span>
+        </div>
+        <div class="day-content">
+          <div class="timeline">
+            <!-- Breakfast -->
+            <div class="tl-item">
+              <div class="tl-icon meal">&#x2615;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t1_h">早餐：便利商店</h4>
+                <p data-i18n="d2_t1_p">高效解決。預算 &yen;300~600。推薦 7-11 飯糰、FamilyMart 三明治。</p>
+                <span class="tag tag-food" data-i18n="tag_food">餐飲</span>
+              </div>
+            </div>
+            <!-- Asakusa -->
+            <div class="tl-item">
+              <div class="tl-icon explore">&#x26E9;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t2_h">上午：淺草 (Asakusa)</h4>
+                <p data-i18n="d2_t2_p">從東京最古老的寺廟出發。穿過雷門與仲見世通，實際上是從世俗世界逐步進入神聖空間的「淨化」過程。淺草寺旁緊鄰「淺草神社」—— 佛教觀音與神道教比鄰而居，是活生生的「神佛習合」。</p>
+                <span class="tag tag-culture" data-i18n="tag_culture">文化</span>
+              </div>
+            </div>
+            <!-- Ueno -->
+            <div class="tl-item">
+              <div class="tl-icon explore">&#x1F3DB;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t3_h">中午：上野 (Ueno)</h4>
+                <p data-i18n="d2_t3_p">漫步上野恩賜公園，切換至阿美橫丁體驗下町都市的強大生命力。</p>
+                <span class="tag tag-culture" data-i18n="tag_culture">文化</span>
+              </div>
+            </div>
+            <!-- Lunch -->
+            <div class="tl-item">
+              <div class="tl-icon meal">&#x1F35C;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t4_h">午餐：阿美橫丁平價美食</h4>
+                <p data-i18n="d2_t4_p">預算 &yen;800~1,500。海鮮丼、串燒、炸物應有盡有。</p>
+                <a href="https://www.bring-you.info/zh-tw/ueno-restaurants" target="_blank" rel="noopener" class="tabelog-link">阿美橫丁美食推薦 (Bring You)</a><br>
+                <span class="tag tag-food" data-i18n="tag_food">餐飲</span>
+              </div>
+            </div>
+            <!-- Transport -->
+            <div class="tl-item">
+              <div class="tl-icon transport">&#x1F689;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t5_h">交通轉場：JR 山手線 東 &rarr; 西</h4>
+                <p data-i18n="d2_t5_p">從上野搭乘 JR 山手線前往澀谷 / 新宿方向，車程約 25-30 分鐘。</p>
+                <span class="tag tag-transport" data-i18n="tag_transport">交通</span>
+              </div>
+            </div>
+            <!-- Shibuya -->
+            <div class="tl-item">
+              <div class="tl-icon explore">&#x1F307;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t6_h">傍晚：澀谷 (Shibuya)</h4>
+                <p data-i18n="d2_t6_p">直擊年輕文化中心「澀谷十字路口」，世界最繁忙的行人穿越道。感受現代東京的脈動。</p>
+                <span class="tag tag-culture" data-i18n="tag_culture">文化</span>
+              </div>
+            </div>
+            <!-- Dinner -->
+            <div class="tl-item">
+              <div class="tl-icon meal">&#x1F363;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t7_h">晚餐：新宿周邊</h4>
+                <p data-i18n="d2_t7_p">入夜後轉戰新宿，沒入百貨商圈與歌舞伎町的迷人夜景。享用拉麵或燒肉。</p>
+                <a href="https://tw.savorjapan.com/contents/discover-oishii-japan/cheap-eats-shinjuku-16-affordable-restaurants-izakayas-ramen-shabu-shabu" target="_blank" rel="noopener" class="tabelog-link">新宿平價美食推薦 (Savor Japan)</a><br>
+                <span class="tag tag-food" data-i18n="tag_food">餐飲</span>
+              </div>
+            </div>
+            <!-- Shinjuku -->
+            <div class="tl-item">
+              <div class="tl-icon explore">&#x1F303;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d2_t8_h">夜晚：新宿 (Shinjuku)</h4>
+                <p data-i18n="d2_t8_p">如果早上的淺草代表對「來世與傳統」的敬畏，晚上的新宿則代表對「現世與物質」的極致追求。這正是東京雙重性格的完美調和。</p>
+                <span class="tag tag-culture" data-i18n="tag_culture">文化</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-block">
+        <div class="day-header">
+          <span class="day-num">Day 3</span>
+          <span class="day-title" data-i18n="d3_title">完美撤退與最終衝刺</span>
+        </div>
+        <div class="day-content">
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-icon explore">&#x1F6CD;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d3_t1_h">09:00 - 12:00 最終補給</h4>
+                <p data-i18n="d3_t1_p">於秋葉原基地周邊或上野進行最後的伴手禮與藥妝採購。以基地為中心，無需提著大包小包跨區移動。</p>
+                <span class="tag tag-tip" data-i18n="tag_shopping">採購</span>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-icon base">&#x1F9F3;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d3_t2_h">13:00 - 14:00 戰略撤退</h4>
+                <p data-i18n="d3_t2_p">返回飯店提取行李，搭乘 JR 山手線至日暮里。</p>
+                <span class="tag tag-transport" data-i18n="tag_transport">交通</span>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-icon transport">&#x1F685;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d3_t3_h">14:30 - 15:30 高速直達</h4>
+                <p data-i18n="d3_t3_p">搭乘 Skyliner（約 &yen;2,570）平穩快速返回成田機場。</p>
+                <span class="tag tag-transport" data-i18n="tag_transport">交通</span>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-icon transport">&#x2708;</div>
+              <div class="tl-body">
+                <h4 data-i18n="d3_t4_h">傍晚 滿載歸途</h4>
+                <p data-i18n="d3_t4_p">搭機返回，完美結束 72 小時兼具文化深度與執行效率的週末。</p>
+                <span class="tag tag-transport" data-i18n="tag_transport">交通</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== THEMES: RELIGION DEEP DIVE ========== -->
+  <section class="section section-themes" id="themes">
+    <div class="container">
+      <h2 class="section-title" data-i18n="themes_title">主題深度探索</h2>
+      <p class="section-lead" data-i18n="themes_lead">透過信仰的濾鏡，深度解鎖東京的文化底蘊與精神世界。</p>
+
+      <!-- Religion: Full-width hero card -->
+      <div class="religion-deep-dive">
+
+        <!-- Section 1: Core concept -->
+        <div class="religion-hero-card">
+          <div class="religion-hero-header">
+            <span class="religion-hero-icon">&#x26E9;</span>
+            <div>
+              <h3>Religion</h3>
+              <p class="theme-subtitle" data-i18n="rel_sub">神佛習合 &mdash; Shinbutsu-Shūgō</p>
+            </div>
+          </div>
+          <p class="religion-hero-intro" data-i18n="rel_intro">在日本，宗教不是排他的信仰，而是各取所需的「生活工具」。神道教與佛教歷經千年融合，形成獨特的「神佛習合」體系 &mdash; 這構成了東京包容萬物的獨特底色，也是理解這座城市最深層的鑰匙。</p>
+        </div>
+
+        <!-- Section 2: Life cycle -->
+        <div class="religion-section">
+          <h4 class="religion-section-title" data-i18n="rel_lifecycle_title">生命的三重信仰</h4>
+          <p class="religion-section-desc" data-i18n="rel_lifecycle_desc">日本人的一生，穿梭於不同宗教之間，各取所需，毫無矛盾。</p>
+          <div class="religion-lifecycle">
+            <div class="lifecycle-item">
+              <span class="lc-label">生</span>
+              <p data-i18n="rel_birth"><strong>出生在神道：</strong>掌管「生」與「現世利益」。嬰兒出生後的「宮參」（初參拜）在神社進行，祈求神明庇佑健康成長。</p>
+            </div>
+            <div class="lifecycle-item">
+              <span class="lc-label">愛</span>
+              <p data-i18n="rel_love"><strong>結婚在基督：</strong>追求浪漫與儀式感。超過 60% 的日本婚禮選擇西式教堂，展現對外來文化的借鑑與實用主義。</p>
+            </div>
+            <div class="lifecycle-item">
+              <span class="lc-label">滅</span>
+              <p data-i18n="rel_death"><strong>死後去佛教：</strong>掌管「死」與「來世」。超過 90% 的日本葬禮由佛教寺院主持，追求彼岸解脫與脫離輪迴。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Shinto vs Buddhism comparison -->
+        <div class="religion-section">
+          <h4 class="religion-section-title" data-i18n="rel_compare_title">兩大信仰體系對照</h4>
+          <div class="compare-table religion-compare-expanded">
+            <div class="compare-col compare-shinto">
+              <div class="compare-header">
+                <span class="compare-icon">&#x26A9;</span>
+                <h4 data-i18n="rel_shinto_h">神道教 Shinto</h4>
+              </div>
+              <ul class="compare-list">
+                <li data-i18n="rel_shinto_l1">核心追求：「淨」，避免「穢」</li>
+                <li data-i18n="rel_shinto_l2">信仰對象：八百萬神（自然萬物皆有靈）</li>
+                <li data-i18n="rel_shinto_l3">代表建築：神社 (Shrine)</li>
+                <li data-i18n="rel_shinto_l4">核心標誌：鳥居（結界，分隔神聖與世俗）</li>
+                <li data-i18n="rel_shinto_l5">參拜方式：二拜二拍手一拜</li>
+                <li data-i18n="rel_shinto_l6">關注領域：現世利益、生育、祈福</li>
+              </ul>
+            </div>
+            <div class="compare-col compare-buddhism">
+              <div class="compare-header">
+                <span class="compare-icon">&#x2638;</span>
+                <h4 data-i18n="rel_buddhism_h">佛教 Buddhism</h4>
+              </div>
+              <ul class="compare-list">
+                <li data-i18n="rel_buddhism_l1">核心追求：「悟」，超越現世苦難</li>
+                <li data-i18n="rel_buddhism_l2">信仰對象：佛陀、菩薩、明王</li>
+                <li data-i18n="rel_buddhism_l3">代表建築：寺廟 / 佛塔 (Temple)</li>
+                <li data-i18n="rel_buddhism_l4">核心標誌：佛像、蓮花、法輪</li>
+                <li data-i18n="rel_buddhism_l5">參拜方式：合掌、焚香、念佛</li>
+                <li data-i18n="rel_buddhism_l6">關注領域：來世解脫、喪葬、超度</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Sacred spots in our itinerary -->
+        <div class="religion-section" id="sacred-spots">
+          <h4 class="religion-section-title" data-i18n="rel_spots_title">72 小時神聖座標</h4>
+          <p class="religion-section-desc" data-i18n="rel_spots_desc">本行程中造訪的重要信仰地標，見證神佛習合的活歷史。</p>
+          <div class="religion-spots-grid">
+            <div class="religion-spot-card spot-shrine spot-kanda" onclick="window.location.href='kanda.html'" style="cursor: pointer;" title="探索神田明神">
+              <div class="spot-badge" data-i18n="rel_spot_shrine_badge">神社</div>
+              <h5 data-i18n="rel_spot1_h">神田明神</h5>
+              <p class="spot-location" data-i18n="rel_spot1_loc">秋葉原 &middot; Day 1</p>
+              <p class="spot-desc" data-i18n="rel_spot1_desc">守護江戶三大祭之一「神田祭」的千年古社。從秋葉原的霓虹走幾步路，便能踏入結界之內 &mdash; 現代御宅文化與古老神道信仰的驚人並置。IT 安全守護御守是科技時代的獨特產物。</p>
+            </div>
+            <div class="religion-spot-card spot-shrine spot-asakusa-shrine" onclick="window.location.href='asakusa-shrine.html'" style="cursor: pointer;" title="探索淺草神社">
+              <div class="spot-badge" data-i18n="rel_spot_shrine_badge">神社</div>
+              <h5 data-i18n="rel_spot2_h">淺草神社</h5>
+              <p class="spot-location" data-i18n="rel_spot2_loc">淺草 &middot; Day 2</p>
+              <p class="spot-desc" data-i18n="rel_spot2_desc">與淺草寺比鄰而居的神道神社，供奉發現觀音像的三位漁師。佛教觀音與神道教在同一境內共存，是「神佛習合」最直觀的活教材。</p>
+            </div>
+            <div class="religion-spot-card spot-temple spot-asakusa-temple" onclick="window.location.href='asakusa-temple.html'" style="cursor: pointer;" title="探索淺草寺">
+              <div class="spot-badge" data-i18n="rel_spot_temple_badge">寺院</div>
+              <h5 data-i18n="rel_spot3_h">淺草寺（金龍山）</h5>
+              <p class="spot-location" data-i18n="rel_spot3_loc">淺草 &middot; Day 2</p>
+              <p class="spot-desc" data-i18n="rel_spot3_desc">東京最古老的佛教寺院，建於 628 年。穿過雷門、仲見世通，是從世俗逐步走入神聖空間的「參道淨化」過程。香爐的線香裊裊升起，信眾以煙撲身祈求消災。</p>
+            </div>
+            <div class="religion-spot-card spot-shrine spot-meiji" onclick="window.location.href='meiji.html'" style="cursor: pointer;" title="探索明治神宮">
+              <div class="spot-badge" data-i18n="rel_spot_shrine_badge">神社</div>
+              <h5 data-i18n="rel_spot4_h">明治神宮</h5>
+              <p class="spot-location" data-i18n="rel_spot4_loc">原宿 / 澀谷</p>
+              <p class="spot-desc" data-i18n="rel_spot4_desc">佇立於 70 萬棵樹木的人造森林中，供奉明治天皇與昭憲皇太后。從喧鬧的原宿竹下通到神宮的大鳥居，僅一步之遙便從「世俗」跨入「神聖」&mdash; 東京雙重性格的完美縮影。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Key insight -->
+        <div class="religion-insight">
+          <blockquote data-i18n="rel_insight">
+            「日本人不是無宗教，而是超宗教。他們用神道迎接生命，用基督教慶祝愛情，用佛教安頓死亡。這不是信仰的混亂，而是一種極致的實用主義 &mdash; 萬物皆可為我所用，各取所需、和而不同。理解了這一點，你才能真正讀懂東京的每一座鳥居與每一縷線香。」
+          </blockquote>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CULTURAL MAPPING ========== -->
+  <section class="section section-mapping">
+    <div class="container">
+      <h2 class="section-title" data-i18n="mapping_title">空間映射：跨越心靈象限</h2>
+      <div class="quadrant-chart">
+        <div class="quadrant-axis-y">
+          <span class="axis-label-top" data-i18n="axis_spiritual">精神 / 神聖</span>
+          <span class="axis-label-bottom" data-i18n="axis_material">物質 / 世俗</span>
+        </div>
+        <div class="quadrant-axis-x">
+          <span class="axis-label-left" data-i18n="axis_traditional">傳統</span>
+          <span class="axis-label-right" data-i18n="axis_modern">現代</span>
+        </div>
+        <div class="quadrant-grid">
+          <div class="q-item q-tl">
+            <strong data-i18n="q_meiji">明治神宮</strong>
+            <span data-i18n="q_meiji_desc">神道教的靜謐結界</span>
+          </div>
+          <div class="q-item q-tc">
+            <strong data-i18n="q_asakusa_ueno">淺草 / 上野</strong>
+            <span data-i18n="q_asakusa_ueno_desc">佛教寺院與下町風情</span>
+          </div>
+          <div class="q-item q-tr">
+            <strong data-i18n="q_shinjuku_shibuya">新宿 / 澀谷</strong>
+            <span data-i18n="q_shinjuku_shibuya_desc">潮流不夜城</span>
+          </div>
+          <div class="q-item q-br">
+            <strong data-i18n="q_akiba">秋葉原</strong>
+            <span data-i18n="q_akiba_desc">現代的「八百萬神」崇拜</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BUDGET ========== -->
+  <section class="section section-budget" id="budget">
+    <div class="container">
+      <h2 class="section-title" data-i18n="budget_title">成本價值重構</h2>
+      <p class="section-lead" data-i18n="budget_lead">用最精簡的資源，買到最濃縮的精華。</p>
+
+      <div class="budget-grid">
+        <div class="budget-card fixed">
+          <h4 data-i18n="budget_fixed">固定成本 Fixed</h4>
+          <div class="budget-item">
+            <span data-i18n="budget_flights">機票</span>
+            <span class="budget-val">NT$12,000 ~ 18,000</span>
+          </div>
+          <div class="budget-item">
+            <span data-i18n="budget_skyliner">Skyliner 來回</span>
+            <span class="budget-val" data-i18n="budget_skyliner_val">約 NT$1,100</span>
+          </div>
+        </div>
+        <div class="budget-card variable">
+          <h4 data-i18n="budget_variable">變動成本 Variable</h4>
+          <div class="budget-item">
+            <span data-i18n="budget_hotel">住宿 (2晚)</span>
+            <span class="budget-val">NT$2,400 ~ 8,000</span>
+          </div>
+          <div class="budget-item">
+            <span data-i18n="budget_meals">餐飲 (3日)</span>
+            <span class="budget-val">NT$1,500 ~ 2,500</span>
+          </div>
+          <div class="budget-item">
+            <span data-i18n="budget_transit">市區交通 (3日)</span>
+            <span class="budget-val">NT$500 ~ 850</span>
+          </div>
+        </div>
+        <div class="budget-card total">
+          <h4 data-i18n="budget_total">基礎體驗總預算</h4>
+          <div class="budget-total">
+            <span class="total-val">NT$ 17,500 ~ 30,450</span>
+            <span class="total-note" data-i18n="budget_note">(起)</span>
+          </div>
+          <p class="budget-philosophy" data-i18n="budget_philosophy">捨棄兩天的走馬看花，將預算省下，換取 72 小時無間斷的「高純度」文化與感官體驗。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEAM ========== -->
+  <section class="section section-team" id="team">
+    <div class="container">
+      <h2 class="section-title" data-i18n="team_title">團隊介紹</h2>
+      <p class="section-lead" data-i18n="team_lead">龍華科技大學 遊憩數媒實作課程</p>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">張</div>
+          <h4>張佑任</h4>
+          <p data-i18n="team_member">團隊成員</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">牛</div>
+          <h4>牛兆凱</h4>
+          <p data-i18n="team_member">團隊成員</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">陳</div>
+          <h4>陳琮澔</h4>
+          <p data-i18n="team_member">團隊成員</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CLOSING ========== -->
+  <section class="section section-closing">
+    <div class="container">
+      <div class="closing-visual">
+        <div class="taichi">
+          <div class="taichi-red">
+            <span data-i18n="taichi_neon">霓虹</span>
+            <small data-i18n="taichi_neon_desc">世俗 / 新宿 / 澀谷</small>
+          </div>
+          <div class="taichi-black">
+            <span data-i18n="taichi_incense">線香</span>
+            <small data-i18n="taichi_incense_desc">神聖 / 淺草 / 上野</small>
+          </div>
+        </div>
+      </div>
+      <h2 class="closing-title" data-i18n="closing_title">在霓虹與線香之間，<br>找到屬於你的東京</h2>
+      <p class="closing-text" data-i18n="closing_text">東京的偉大，不在於它有多現代化，而在於它從未要求人們在「神聖」與「世俗」之間做出選擇。</p>
+      <p class="closing-quote" data-i18n="closing_quote">出生在神道，死後去佛教；早晨參拜淺草，夜晚迷失新宿。<br>這不僅是地理移動，更是體現日本人「包容萬物、各取所需」生活哲學的深度之旅。</p>
+      <p class="closing-cta" data-i18n="closing_cta">帶上文化濾鏡，重新出發。</p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/mlogo.png" alt="龍華科技大學" class="footer-logo-img">
+        </div>
+        <p class="footer-course" data-i18n="footer_course">龍華科技大學 &middot; 遊憩數媒實作課程</p>
+        <p class="footer-members">張佑任 &middot; 牛兆凱 &middot; 陳琮澔</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.youtube.com/watch?v=Cu2s1a2UJJI&pp=ygUS5p2x5Lqs5a6X5pWZ5LmL5peF0gcJCT4LAYcqIYzv" target="_blank" rel="noopener" class="social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.015 3.015 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>YouTube</span>
+        </a>
+        <a href="https://www.instagram.com/p/DIbSCGrzqmU/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/breathetokyo/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <p>72H Tokyo Strategic Blueprint &copy; 2026 Edition</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="script.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>

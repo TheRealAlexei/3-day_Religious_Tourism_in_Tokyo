@@ -1,0 +1,85 @@
+/* ==========================================
+   Meiji Jingu Deep Dive - Stylesheet
+   Theme: Washi Warm / Forest Green
+   ========================================== */
+
+/*
+   This page loads style.css -> kanda.css -> meiji.css
+   kanda.css already sets Washi Warm base.
+   This file only adds Meiji Jingu specific overrides,
+   using deep forest green as primary accent to reflect
+   the shrine's iconic 70-hectare artificial forest.
+*/
+
+/* Forest green accent override */
+.mj-page {
+  --clr-accent: #2D6B4A;
+  --clr-accent-2: #24573C;
+}
+
+/* Hero background image */
+.mj-page .kanda-hero-bg.mj-bg {
+  background-image:
+    linear-gradient(to bottom, rgba(250, 247, 242, 0.2) 0%, rgba(250, 247, 242, 0.88) 100%),
+    url('https://storage.googleapis.com/p_64187c91529751506337b4e8/0de97a06-ce81-432b-98f0-f3b6a6c26ed8/%E2%91%A2.webp');
+}
+
+/* Badge - forest green */
+.mj-page .kanda-badge {
+  background: rgba(45, 107, 74, 0.08);
+  border-color: #2D6B4A;
+  color: #2D6B4A;
+}
+
+/* Section title underline uses forest green */
+.mj-page .kanda-h3::after {
+  background: #2D6B4A;
+}
+
+/* Image block decorative corners: green + gold */
+.mj-page .kanda-image-block::before {
+  border-top-color: #2D6B4A;
+  border-left-color: #2D6B4A;
+}
+
+/* Cards */
+.mj-page .cyber-card {
+  border-color: var(--clr-border);
+  background: var(--clr-surface);
+}
+
+/* Hover top-line: forest green -> gold -> warm brown (nature palette) */
+.mj-page .cyber-card::before {
+  background: linear-gradient(90deg, #2D6B4A, #B8860B, #8B7355);
+}
+
+.mj-page .cyber-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: #2D6B4A;
+}
+
+.mj-page .cyber-icon {
+  text-shadow: none;
+}
+
+/* Access box - forest green left border */
+.mj-page .access-box {
+  border-left-color: #2D6B4A;
+}
+
+/* Access list strong labels */
+.mj-page .access-list > li > strong {
+  color: #2D6B4A;
+}
+
+/* Return button - forest green */
+.mj-page .kanda-btn {
+  border-color: #2D6B4A;
+  color: #2D6B4A;
+}
+
+.mj-page .kanda-btn:hover {
+  background: #2D6B4A;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(45, 107, 74, 0.2);
+}
