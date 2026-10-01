@@ -147,7 +147,7 @@ img { max-width: 100%; display: block; }
 }
 .nav-link:hover, .nav-link.active { color: var(--clr-text); }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-.nav-link.active { color: var(--clr-accent); } /* 導航列當前位置高亮 */
+.nav-link.active { color: var(--clr-accent); }
 
 .menu-toggle {
   display: none;
@@ -156,7 +156,7 @@ img { max-width: 100%; display: block; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px 4px; /* 增加觸控範圍 */
+  padding: 8px 4px;
   z-index: 1001;
 }
 .menu-toggle span {
@@ -602,6 +602,70 @@ section[id], .religion-section[id], div[id] {
   text-align: center;
 }
 
+/* ---------- Map Legend Styles ---------- */
+.map-legend {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--clr-text);
+  min-width: 180px;
+}
+
+.map-legend-heading {
+  font-size: 0.9rem;
+  color: var(--clr-text);
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: var(--clr-text-muted);
+}
+.map-legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.map-legend-line {
+  display: inline-block;
+  width: 20px;
+  height: 4px;
+  border-radius: 2px;
+}
+.map-legend-line-dash {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    var(--clr-text) 2px,
+    var(--clr-text) 4px
+  );
+  height: 2px;
+  width: 20px;
+}
+
+.map-legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.map-legend-diamond {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--clr-gold);
+  transform: rotate(45deg);
+}
+
 /* Day Block & Collapse Integration */
 .day-block {
   margin-bottom: 48px;
@@ -626,7 +690,7 @@ section[id], .religion-section[id], div[id] {
   background: rgba(243, 238, 232, 0.8);
 }
 .day-header::after {
-  content: '\25B2'; /* 向上箭頭 */
+  content: '\25B2'; 
   font-size: 0.75rem;
   color: var(--clr-text-muted);
   margin-left: auto;
@@ -1267,13 +1331,13 @@ section[id], .religion-section[id], div[id] {
   }
   .hero-subtitle { 
     font-size: 1.15rem; 
-    margin-bottom: 32px; /* 加大副標與說明的距離 */
+    margin-bottom: 32px; 
   }
   .hero-desc {
     font-size: 0.95rem;
-    line-height: 1.9; /* 增加行高，讓文字呼吸 */
-    margin-bottom: 40px; /* 加大與底部按鈕的距離 */
-    padding: 0 10px; /* 避免文字貼齊螢幕邊緣 */
+    line-height: 1.9; 
+    margin-bottom: 40px; 
+    padding: 0 10px; 
   }
   .hero-cta { padding: 12px 32px; }
   
@@ -1327,6 +1391,9 @@ section[id], .religion-section[id], div[id] {
   #tokyo-topology-map { height: 420px; }
   .home-floating-btn { right: 14px; bottom: 18px; padding: 10px 14px; font-size: 12px; }
   
+  /* 地圖圖例手機版修正 */
+  .map-legend { min-width: 160px; padding: 10px 12px; }
+
   .day-header { padding: 16px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .day-content { padding: 20px 16px; }
   .timeline { padding-left: 40px; }
