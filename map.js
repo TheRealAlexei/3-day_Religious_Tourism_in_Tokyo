@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }).setView(tokyoCenter, defaultZoom);
     window._tokyoMap = map;
 
-    // ✨ 創新點 1：替換為極簡的 CartoDB Positron 底圖，大幅減少視覺雜訊
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      maxZoom: 19
+// ✅ 替換為 Esri Light Gray Canvas (免 API Key，極簡乾淨不干擾路線)
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+      maxZoom: 16
     }).addTo(map);
 
     // ✨ 創新點 2：建立圖層群組，分離「主線」與「延伸地標」，降低雜亂感
