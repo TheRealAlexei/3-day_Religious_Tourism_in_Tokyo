@@ -1,0 +1,57 @@
+/* ==========================================
+   Asakusa Shrine Deep Dive - Stylesheet
+   Theme: Washi Warm / Shrine Vermilion
+   ========================================== */
+
+/* 暴力鎮壓 kanda.css，絕對只顯示淺草神社的圖片！ */
+body.as-page .kanda-hero-bg,
+.as-page .kanda-hero-bg.as-bg {
+  background-image: url('https://e-asakusa.jp/wp-content/uploads/AsakusaJinja1-1024x768.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* Badge - 同步高對比度的實體朱紅色，確保在任何背景下都清晰 */
+.as-page .kanda-badge {
+  background: rgba(196, 59, 59, 0.95) !important;
+  border-color: var(--clr-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(196, 59, 59, 0.4) !important;
+}
+
+/* Cards - clean white with warm border */
+.as-page .cyber-card {
+  border-color: var(--clr-border);
+  background: var(--clr-surface);
+}
+
+/* Hover top-line: vermilion -> gold -> forest green (三社祭 festive feel) */
+.as-page .cyber-card::before {
+  background: linear-gradient(90deg, var(--clr-accent), var(--clr-gold), #3A8A68);
+}
+
+.as-page .cyber-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: var(--clr-accent);
+}
+
+.as-page .cyber-icon {
+  text-shadow: none;
+}
+
+/* Access box */
+.as-page .access-box {
+  border-left-color: var(--clr-accent);
+}
+
+/* Return button */
+.as-page .kanda-btn {
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.as-page .kanda-btn:hover {
+  background: var(--clr-accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(196, 59, 59, 0.2);
+}
