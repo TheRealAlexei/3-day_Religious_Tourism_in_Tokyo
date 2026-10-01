@@ -49,17 +49,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }).setView(tokyoCenter, defaultZoom);
     window._tokyoMap = map;
 
-// ✅ 替換為 Esri Light Gray Canvas (免 API Key，極簡乾淨不干擾路線)
+    // ✨ 創新點 1：替換為 Esri Light Gray Canvas (免 API Key，極簡乾淨)
+    // 加入 maxNativeZoom 讓放太大時只會拉伸圖片，不會變成灰畫面
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-      maxZoom: 16
+      maxNativeZoom: 16,
+      maxZoom: 19
     }).addTo(map);
 
     // ✨ 創新點 2：建立圖層群組，分離「主線」與「延伸地標」，降低雜亂感
     var routeLayer = L.layerGroup().addTo(map);
     var mainMarkerLayer = L.layerGroup().addTo(map);
     var optionalMarkerLayer = L.layerGroup(); // 預設不加入地圖，隱藏延伸地標
-    var macroLayer = L.layerGroup();
     var legendNode = null;
 
     var colors = {
