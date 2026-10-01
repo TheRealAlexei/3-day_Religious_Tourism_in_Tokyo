@@ -145,8 +145,9 @@ img { max-width: 100%; display: block; }
   background: var(--clr-accent);
   transition: width 0.3s;
 }
-.nav-link:hover { color: var(--clr-text); }
-.nav-link:hover::after { width: 100%; }
+.nav-link:hover, .nav-link.active { color: var(--clr-text); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link.active { color: var(--clr-accent); } /* 導航列當前位置高亮 */
 
 .menu-toggle {
   display: none;
@@ -155,7 +156,8 @@ img { max-width: 100%; display: block; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px 4px; /* 增加觸控範圍 */
+  z-index: 1001;
 }
 .menu-toggle span {
   display: block;
@@ -163,6 +165,7 @@ img { max-width: 100%; display: block; }
   height: 2px;
   background: var(--clr-text);
   transition: transform 0.3s, opacity 0.3s;
+  border-radius: 2px;
 }
 
 /* ---------- Language Dropdown ---------- */
@@ -274,7 +277,6 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 
-/* Video background */
 .hero-video {
   position: absolute;
   top: 50%;
@@ -288,7 +290,6 @@ img { max-width: 100%; display: block; }
   z-index: 0;
 }
 
-/* Sunset tint overlay on top of video */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -406,57 +407,47 @@ section[id], .religion-section[id], div[id] {
   margin: 0 auto 48px;
 }
 
-/* ===== Section Color Zones: Sunset → Night narrative ===== */
-
-/* --- Intro: 接續 Hero 暮色，深暖底 --- */
+/* ===== Section Color Zones ===== */
 .section-intro {
   background: linear-gradient(180deg, #3D2F52 0%, #463A54 40%, #4A3D50 100%);
   color: #F0EAE0;
 }
 .section-intro .section-title::after { background: #FCDCB4; }
 
-/* --- Itinerary: 暖米色呼吸區 --- */
 .section-itinerary {
   background: #FAF7F2;
   color: var(--clr-text);
 }
 
-/* --- Themes: 深棕暖色文化帶 --- */
 .section-themes {
   background: linear-gradient(180deg, #3E302A 0%, #44352E 50%, #3E302A 100%);
   color: #F0EAE0;
 }
 .section-themes .section-title::after { background: #D4880E; }
 
-/* --- Mapping: 暖米回歸 --- */
 .section-mapping {
   padding: 80px 0;
   background: #FAF7F2;
   color: var(--clr-text);
 }
 
-/* --- Budget: 淡灰米 --- */
 .section-budget {
   background: #F3EEE8;
   color: var(--clr-text);
 }
 
-/* --- Team: 暖白 --- */
 .section-team {
   background: #FAF7F2;
   color: var(--clr-text);
 }
 
-/* --- Closing: 回到黃昏 → 暮色 --- */
 .section-closing {
   text-align: center;
   padding: 120px 0;
-  background:
-    linear-gradient(180deg, #FAF7F2 0%, #EDB07A 25%, #C97060 50%, #A05A6E 75%, #4A3D50 100%);
+  background: linear-gradient(180deg, #FAF7F2 0%, #EDB07A 25%, #C97060 50%, #A05A6E 75%, #4A3D50 100%);
   color: #F0EAE0;
 }
 
-/* --- Footer: 深暖收尾 --- */
 .site-footer {
   background: #342C28;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -553,7 +544,6 @@ section[id], .religion-section[id], div[id] {
   z-index: 1;
 }
 
-/* Map header inside itinerary section */
 .map-header {
   text-align: center;
   padding: 20px 20px 0;
@@ -572,7 +562,6 @@ section[id], .religion-section[id], div[id] {
   line-height: 1.6;
 }
 
-/* Floating home button */
 .home-floating-btn {
   position: absolute;
   bottom: 30px;
@@ -606,219 +595,6 @@ section[id], .religion-section[id], div[id] {
   transform: translateY(0);
 }
 
-/* Leaflet route marker system */
-.map-marker-shell {
-  background: transparent;
-  border: 0;
-}
-
-.map-marker-pin {
-  width: 30px;
-  height: 30px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  background: var(--pin-color);
-  border:  solid #2a2a35;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.22), 0 0 0 4px color-mix(in srgb, var(--pin-color), transparent 78%);
-}
-
-.map-marker-pin span {
-  transform: rotate(45deg);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.map-marker-base {
-  border-radius: 8px 8px 8px 0;
-}
-
-.map-marker-shrine,
-.map-marker-temple {
-  box-shadow: 0 8px 20px rgba(180, 83, 9, 0.28), 0 0 0 4px rgba(255, 237, 213, 0.84);
-}
-
-/* Leaflet popup overrides - card style with image */
-.map-custom-popup .leaflet-popup-content-wrapper {
-  padding: 0 !important;
-  overflow: hidden;
-  border-radius: 14px !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0,0.2) !important;
-  font-family: var(--font-sans);
-}
-.map-custom-popup .leaflet-popup-content {
-  margin: 0 !important;
-  width: 300px !important;
-}
-.map-custom-popup .leaflet-popup-tip {
-  background: var(--clr-surface);
-}
-.map-popup-card-img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-}
-.map-popup-card-body {
-  padding: 18px;
-}
-.map-popup-title {
-  font-weight: 800;
-  font-size: 17px;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--clr-border);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  letter-spacing: 0.5px;
-}
-.map-popup-yamanote { color: #2A5CAA; }
-.map-popup-shitamachi { color: #E85D3E; }
-.map-popup-transit { color: #6B7280; }
-.map-popup-shrine { color: #B45309; }
-.map-popup-temple { color: #7C3AED; }
-.map-popup-landmark { color: #2A5CAA; }
-.map-popup-base { color: var(--clr-text); }
-.map-popup-food { color: #D97706; }
-
-/* Popup badge */
-.map-popup-badge {
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-.map-badge-yamanote { background: #2A5CAA; }
-.map-badge-shitamachi { background: #E85D3E; }
-.map-badge-transit { background: #6B7280; }
-.map-badge-shrine { background: #B45309; }
-.map-badge-temple { background: #7C3AED; }
-.map-badge-landmark { background: #2A5CAA; }
-.map-badge-base { background: var(--clr-text); }
-.map-badge-food { background: #D97706; }
-
-.map-popup-meta {
-  display: inline-block;
-  margin-bottom: 10px;
-  padding: 4px 8px;
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: 999px;
-  color: var(--clr-text-muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-}
-
-.map-popup-desc {
-  font-size: 13px;
-  color: var(--clr-text);
-  line-height: 1.6;
-  text-align: justify;
-}
-
-/* Map legend */
-.map-legend {
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--clr-text);
-  line-height: 1.7;
-  border: 1px solid var(--clr-border);
-}
-.map-legend-heading {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--clr-border);
-}
-.map-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 3px;
-}
-.map-legend-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.map-legend-line {
-  width: 22px;
-  height: 4px;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
-.map-legend-line-dash {
-  height: 0;
-  background: transparent !important;
-  border-top: 4px dashed #5F6C7B;
-  color: #5F6C7B;
-}
-
-.map-legend-diamond {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  background: linear-gradient(135deg, #FFE8A3, #D4AF37 55%, #8A5A00);
-  border:  solid #2a2a35;
-  transform: rotate(45deg);
-  box-shadow: 0 0 0 1px rgba(138, 90, 0, 0.32);
-}
-
-.map-scale-hint {
-  max-width: 300px;
-  padding: 10px 13px;
-  background: rgba(44, 40, 37, 0.88);
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  font-family: var(--font-sans);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.tokyo-macro-shell {
-  background: transparent;
-  border: 0;
-}
-
-.tokyo-macro-diamond {
-  width: 62px;
-  height: 62px;
-  display: grid;
-  place-items: center;
-  border:  solid #2a2a35;
-  background: linear-gradient(135deg, #FFF4BC 0%, #D4AF37 52%, #7A4D00 100%);
-  color: #1F2937;
-  transform: rotate(45deg);
-  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.22), 0 16px 34px rgba(0, 0, 0,0.3);
-  cursor: pointer;
-}
-
-.tokyo-macro-diamond span {
-  display: block;
-  transform: rotate(-45deg);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
 .map-note {
   padding: 8px 16px;
   font-size: 0.8rem;
@@ -826,6 +602,7 @@ section[id], .religion-section[id], div[id] {
   text-align: center;
 }
 
+/* Day Block & Collapse Integration */
 .day-block {
   margin-bottom: 48px;
   background: var(--clr-surface);
@@ -842,6 +619,35 @@ section[id], .religion-section[id], div[id] {
   padding: 20px 28px;
   background: var(--clr-surface-2);
   border-bottom: 1px solid var(--clr-border);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.day-header:hover {
+  background: rgba(243, 238, 232, 0.8);
+}
+.day-header::after {
+  content: '\25B2'; /* 向上箭頭 */
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+  margin-left: auto;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.day-block.collapsed .day-header::after {
+  transform: rotate(180deg);
+}
+
+.day-content {
+  padding: 28px;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 1;
+}
+.day-block.collapsed .day-content {
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0;
+  border-top: none;
 }
 
 .day-num {
@@ -853,16 +659,11 @@ section[id], .religion-section[id], div[id] {
   border-radius: 20px;
   letter-spacing: 1px;
 }
-
 .day-title {
   font-family: var(--font-serif);
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--clr-text);
-}
-
-.day-content {
-  padding: 28px;
 }
 
 /* Timeline */
@@ -908,7 +709,6 @@ section[id], .religion-section[id], div[id] {
 .tl-icon.base { border-color: var(--clr-gold); }
 .tl-icon.tip { border-color: var(--clr-sport); }
 
-/* Inline food recommendations inside timeline body */
 .tl-reco {
   margin: 10px 0;
   border: 1px solid var(--clr-border);
@@ -948,10 +748,6 @@ section[id], .religion-section[id], div[id] {
   font-weight: 700;
   color: var(--clr-gold);
   white-space: nowrap;
-}
-@media (max-width: 480px) {
-  .tl-reco-item { flex-wrap: wrap; gap: 3px 8px; }
-  .tl-reco-text { flex-basis: 100%; order: 3; }
 }
 
 .tl-body h4 {
@@ -1003,7 +799,6 @@ section[id], .religion-section[id], div[id] {
 /* ---------- Themes ---------- */
 .section-themes .section-lead { opacity: 1; color: rgba(240, 234, 224, 0.65); }
 
-/* Religion Deep Dive */
 .religion-deep-dive {
   max-width: 960px;
   margin: 0 auto;
@@ -1062,7 +857,6 @@ section[id], .religion-section[id], div[id] {
   text-align: justify;
 }
 
-/* Religion section blocks */
 .religion-section {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1129,7 +923,6 @@ section[id], .religion-section[id], div[id] {
   font-size: 1.1rem;
   margin-bottom: 12px;
 }
-
 .lifecycle-item:nth-child(1) .lc-label { background: var(--clr-shrine); color: #fff; }
 .lifecycle-item:nth-child(2) .lc-label { background: var(--clr-gold); color: #fff; }
 .lifecycle-item:nth-child(3) .lc-label { background: var(--clr-temple); color: #fff; }
@@ -1141,7 +934,7 @@ section[id], .religion-section[id], div[id] {
   text-align: left;
 }
 
-/* Comparison table - expanded */
+/* Comparison table */
 .compare-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1154,9 +947,7 @@ section[id], .religion-section[id], div[id] {
   padding: 24px;
   transition: transform 0.3s;
 }
-.compare-col:hover {
-  transform: translateY(-2px);
-}
+.compare-col:hover { transform: translateY(-2px); }
 
 .compare-header {
   display: flex;
@@ -1167,9 +958,7 @@ section[id], .religion-section[id], div[id] {
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.compare-icon {
-  font-size: 1.5rem;
-}
+.compare-icon { font-size: 1.5rem; }
 
 .compare-col h4 {
   font-size: 1rem;
@@ -1198,12 +987,6 @@ section[id], .religion-section[id], div[id] {
 }
 .compare-list li:last-child { border-bottom: none; }
 
-.compare-col p {
-  font-size: 0.85rem;
-  color: rgba(240, 234, 224, 0.65);
-  line-height: 1.6;
-}
-
 /* Religion spots grid */
 .religion-spots-grid {
   display: grid;
@@ -1222,13 +1005,8 @@ section[id], .religion-section[id], div[id] {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
-
-.religion-spot-card.spot-shrine {
-  border-left-color: var(--clr-shrine);
-}
-.religion-spot-card.spot-temple {
-  border-left-color: var(--clr-temple);
-}
+.religion-spot-card.spot-shrine { border-left-color: var(--clr-shrine); }
+.religion-spot-card.spot-temple { border-left-color: var(--clr-temple); }
 
 .spot-badge {
   display: inline-block;
@@ -1239,14 +1017,8 @@ section[id], .religion-section[id], div[id] {
   letter-spacing: 0.5px;
   margin-bottom: 8px;
 }
-.spot-shrine .spot-badge {
-  background: rgba(196, 59, 59, 0.2);
-  color: #E88080;
-}
-.spot-temple .spot-badge {
-  background: rgba(123, 94, 167, 0.2);
-  color: #D4A0D0;
-}
+.spot-shrine .spot-badge { background: rgba(196, 59, 59, 0.2); color: #E88080; }
+.spot-temple .spot-badge { background: rgba(123, 94, 167, 0.2); color: #D4A0D0; }
 
 .religion-spot-card h5 {
   font-family: var(--font-serif);
@@ -1274,47 +1046,28 @@ section[id], .religion-section[id], div[id] {
   position: relative;
   overflow: hidden;
 }
-
 .spot-kanda::before, .spot-asakusa-shrine::before, .spot-asakusa-temple::before, .spot-meiji::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background-size: cover;
   background-position: center;
   transform: translateY(100%);
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   z-index: 0;
 }
+.spot-kanda::before { background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%), url('https://img.shoplineapp.com/media/image_clips/683176afa80cd6000a34dceb/original.jpg?1748072110'); }
+.spot-asakusa-shrine::before { background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%), url('https://e-asakusa.jp/wp-content/uploads/AsakusaJinja1-1024x768.jpg'); }
+.spot-asakusa-temple::before { background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%), url('https://www.urielshen.com/image/catalog/02-TOURHEADM/08JAPAN/02east33/%E9%87%91%E9%BE%8D%E5%B1%B1%E6%B7%BA%E8%8D%89%E5%AF%BAM.jpg?v=1710481200'); }
+.spot-meiji::before { background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%), url('https://storage.googleapis.com/p_64187c91529751506337b4e8/0de97a06-ce81-432b-98f0-f3b6a6c26ed8/%E2%91%A2.webp'); }
 
-.spot-kanda::before {
-  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://img.shoplineapp.com/media/image_clips/683176afa80cd6000a34dceb/original.jpg?1748072110');
-}
-
-.spot-asakusa-shrine::before {
-  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://e-asakusa.jp/wp-content/uploads/AsakusaJinja1-1024x768.jpg');
-}
-
-.spot-asakusa-temple::before {
-  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://www.urielshen.com/image/catalog/02-TOURHEADM/08JAPAN/02east33/%E9%87%91%E9%BE%8D%E5%B1%B1%E6%B7%BA%E8%8D%89%E5%AF%BAM.jpg?v=1710481200');
-}
-
-.spot-meiji::before {
-  background-image: linear-gradient(to top, rgba(0, 0, 0,0.7) 0%, rgba(0, 0, 0,0.2) 100%), url('https://storage.googleapis.com/p_64187c91529751506337b4e8/0de97a06-ce81-432b-98f0-f3b6a6c26ed8/%E2%91%A2.webp');
-}
-
-.spot-kanda:hover::before, .spot-asakusa-shrine:hover::before, .spot-asakusa-temple:hover::before, .spot-meiji:hover::before {
-  transform: translateY(0);
-}
+.spot-kanda:hover::before, .spot-asakusa-shrine:hover::before, .spot-asakusa-temple:hover::before, .spot-meiji:hover::before { transform: translateY(0); }
 
 .spot-kanda > *, .spot-asakusa-shrine > *, .spot-asakusa-temple > *, .spot-meiji > * {
   position: relative;
   z-index: 1;
   transition: color 0.4s ease, text-shadow 0.4s ease;
 }
-
 .spot-kanda:hover h5, .spot-asakusa-shrine:hover h5, .spot-asakusa-temple:hover h5, .spot-meiji:hover h5,
 .spot-kanda:hover .spot-location, .spot-asakusa-shrine:hover .spot-location, .spot-asakusa-temple:hover .spot-location, .spot-meiji:hover .spot-location,
 .spot-kanda:hover .spot-desc, .spot-asakusa-shrine:hover .spot-desc, .spot-asakusa-temple:hover .spot-desc, .spot-meiji:hover .spot-desc {
@@ -1322,22 +1075,10 @@ section[id], .religion-section[id], div[id] {
   text-shadow: 0 2px 6px rgba(0, 0, 0,0.8);
 }
 
-.spot-kanda:hover .spot-badge, .spot-asakusa-shrine:hover .spot-badge, .spot-meiji:hover .spot-badge {
-  background: rgba(196, 59, 59, 0.9);
-  color: #fff;
-}
+.spot-kanda:hover .spot-badge, .spot-asakusa-shrine:hover .spot-badge, .spot-meiji:hover .spot-badge { background: rgba(196, 59, 59, 0.9); color: #fff; }
+.spot-asakusa-temple:hover .spot-badge { background: rgba(123, 94, 167, 0.9); color: #fff; }
 
-.spot-asakusa-temple:hover .spot-badge {
-  background: rgba(123, 94, 167, 0.9);
-  color: #fff;
-}
-
-/* Religion insight / blockquote */
-.religion-insight {
-  margin-top: 8px;
-  padding: 0;
-}
-
+.religion-insight { margin-top: 8px; padding: 0; }
 .religion-insight blockquote {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1352,7 +1093,6 @@ section[id], .religion-section[id], div[id] {
   position: relative;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
-
 .religion-insight blockquote::before {
   content: '\201C';
   position: absolute;
@@ -1365,7 +1105,6 @@ section[id], .religion-section[id], div[id] {
 }
 
 /* ---------- Quadrant Chart ---------- */
-
 .quadrant-chart {
   position: relative;
   max-width: 600px;
@@ -1375,57 +1114,23 @@ section[id], .religion-section[id], div[id] {
   align-items: center;
   justify-content: center;
 }
-
 .quadrant-axis-y {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  left: 50%;
-  background: rgba(44, 40, 37, 0.15);
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(44, 40, 37, 0.15);
 }
-
-.axis-label-top,
-.axis-label-bottom {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: var(--clr-text-muted);
-  white-space: nowrap;
-  letter-spacing: 1px;
+.axis-label-top, .axis-label-bottom {
+  position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: var(--clr-text-muted); white-space: nowrap; letter-spacing: 1px;
 }
-.axis-label-top { top: -30px; }
-.axis-label-bottom { bottom: -30px; }
+.axis-label-top { top: -30px; } .axis-label-bottom { bottom: -30px; }
 
 .quadrant-axis-x {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(44, 40, 37, 0.15);
+  position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(44, 40, 37, 0.15);
 }
-
-.axis-label-left,
-.axis-label-right {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.75rem;
-  color: var(--clr-text-muted);
-  letter-spacing: 1px;
+.axis-label-left, .axis-label-right {
+  position: absolute; top: 50%; transform: translateY(-50%); font-size: 0.75rem; color: var(--clr-text-muted); letter-spacing: 1px;
 }
-.axis-label-left { left: -40px; }
-.axis-label-right { right: -40px; }
+.axis-label-left { left: -40px; } .axis-label-right { right: -40px; }
 
-.quadrant-grid {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
+.quadrant-grid { position: relative; width: 100%; height: 100%; }
 .q-item {
   position: absolute;
   background: var(--clr-surface);
@@ -1436,22 +1141,9 @@ section[id], .religion-section[id], div[id] {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s, border-color 0.3s;
 }
-.q-item:hover {
-  transform: scale(1.05);
-  border-color: var(--clr-accent);
-}
-
-.q-item strong {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 4px;
-  color: var(--clr-text);
-}
-.q-item span {
-  font-size: 0.75rem;
-  color: var(--clr-text-muted);
-}
-
+.q-item:hover { transform: scale(1.05); border-color: var(--clr-accent); }
+.q-item strong { display: block; font-size: 0.9rem; margin-bottom: 4px; color: var(--clr-text); }
+.q-item span { font-size: 0.75rem; color: var(--clr-text-muted); }
 .q-tl { top: 10%; left: 5%; }
 .q-tc { top: 15%; left: 35%; }
 .q-tr { top: 10%; right: 5%; }
@@ -1459,13 +1151,7 @@ section[id], .religion-section[id], div[id] {
 
 /* ---------- Budget ---------- */
 .section-budget .section-lead { opacity: 1; color: var(--clr-text-muted); }
-
-.budget-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
-}
-
+.budget-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
 .budget-card {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
@@ -1473,72 +1159,24 @@ section[id], .religion-section[id], div[id] {
   padding: 28px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
-
-.budget-card h4 {
-  font-size: 1rem;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--clr-border);
-  color: var(--clr-text);
-}
-
+.budget-card h4 { font-size: 1rem; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--clr-border); color: var(--clr-text); }
 .budget-card.fixed h4 { border-bottom-color: var(--clr-eco); }
 .budget-card.variable h4 { border-bottom-color: var(--clr-gold); }
 .budget-card.total h4 { border-bottom-color: var(--clr-accent); }
 
 .budget-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--clr-border);
-  font-size: 0.9rem;
-  color: var(--clr-text);
+  display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--clr-border); font-size: 0.9rem; color: var(--clr-text);
 }
 .budget-item:last-child { border-bottom: none; }
-
-.budget-val {
-  font-weight: 600;
-  color: var(--clr-gold);
-}
-
-.budget-total {
-  text-align: center;
-  padding: 24px 0;
-}
-
-.total-val {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--clr-accent);
-}
-
-.total-note {
-  font-size: 0.8rem;
-  color: var(--clr-text-muted);
-}
-
-.budget-philosophy {
-  font-size: 0.85rem;
-  color: var(--clr-text-muted);
-  text-align: center;
-  line-height: 1.6;
-  margin-top: 12px;
-}
+.budget-val { font-weight: 600; color: var(--clr-gold); }
+.budget-total { text-align: center; padding: 24px 0; }
+.total-val { display: block; font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--clr-accent); }
+.total-note { font-size: 0.8rem; color: var(--clr-text-muted); }
+.budget-philosophy { font-size: 0.85rem; color: var(--clr-text-muted); text-align: center; line-height: 1.6; margin-top: 12px; }
 
 /* ---------- Team ---------- */
 .section-team .section-lead { opacity: 1; color: var(--clr-text-muted); }
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 700px; margin: 0 auto; }
 .team-card {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
@@ -1548,240 +1186,73 @@ section[id], .religion-section[id], div[id] {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s, border-color 0.3s;
 }
-.team-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--clr-accent);
-}
-
+.team-card:hover { transform: translateY(-4px); border-color: var(--clr-accent); }
 .team-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+  width: 72px; height: 72px; border-radius: 50%;
   background: linear-gradient(135deg, var(--clr-accent), var(--clr-gold));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; font-size: 1.5rem; font-weight: 700; color: #fff;
 }
-
-.team-card h4 {
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-  color: var(--clr-text);
-}
-
-.team-card p {
-  font-size: 0.8rem;
-  color: var(--clr-text-muted);
-}
+.team-card h4 { font-size: 1.1rem; margin-bottom: 4px; color: var(--clr-text); }
+.team-card p { font-size: 0.8rem; color: var(--clr-text-muted); }
 
 /* ---------- Closing ---------- */
-.closing-visual {
-  margin-bottom: 40px;
+.closing-visual { margin-bottom: 40px; }
+.taichi { display: flex; justify-content: center; gap: 4px; margin-bottom: 24px; }
+.taichi-red, .taichi-black {
+  width: 140px; height: 140px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700;
 }
-
-.taichi {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-bottom: 24px;
-}
-
-.taichi-red,
-.taichi-black {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
-
-.taichi-red {
-  background: rgba(196, 59, 59, 0.08);
-  border: 2px solid var(--clr-accent);
-  margin-right: -20px;
-}
-
-.taichi-black {
-  background: rgba(123, 94, 167, 0.06);
-  border: 2px solid var(--clr-temple);
-  margin-left: -20px;
-}
-
+.taichi-red { background: rgba(196, 59, 59, 0.08); border: 2px solid var(--clr-accent); margin-right: -20px; }
+.taichi-black { background: rgba(123, 94, 167, 0.06); border: 2px solid var(--clr-temple); margin-left: -20px; }
 .taichi-red span { color: var(--clr-accent); font-size: 1.1rem; }
 .taichi-black span { color: var(--clr-temple); font-size: 1.1rem; }
-.taichi-red small,
-.taichi-black small {
-  font-size: 0.65rem;
-  color: var(--clr-text-muted);
-  margin-top: 4px;
-}
+.taichi-red small, .taichi-black small { font-size: 0.65rem; color: var(--clr-text-muted); margin-top: 4px; }
 
 .closing-title {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 20px;
-  color: #F0EAE0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.4; margin-bottom: 20px; color: #F0EAE0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-
-.closing-text {
-  font-size: 1rem;
-  color: rgba(240, 234, 224, 0.8);
-  margin-bottom: 24px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.closing-quote {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: rgba(252, 220, 180, 0.85);
-  font-style: italic;
-  line-height: 1.8;
-  max-width: 550px;
-  margin: 0 auto 32px;
-}
-
-.closing-cta {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #FCDCB4;
-  letter-spacing: 2px;
-}
+.closing-text { font-size: 1rem; color: rgba(240, 234, 224, 0.8); margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.closing-quote { font-family: var(--font-serif); font-size: 0.95rem; color: rgba(252, 220, 180, 0.85); font-style: italic; line-height: 1.8; max-width: 550px; margin: 0 auto 32px; }
+.closing-cta { font-size: 1.1rem; font-weight: 700; color: #FCDCB4; letter-spacing: 2px; }
 
 /* ---------- Footer ---------- */
-
-.footer-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
-}
-
-.footer-brand {
-  margin-bottom: 28px;
-}
-
-.lhu-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #D4880E;
-  letter-spacing: 2px;
-}
-
-.footer-logo-img {
-  height: 72px;
-  width: auto;
-  object-fit: contain;
-  margin: 0 auto;
-  background: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  filter: brightness(0) invert(1);
-}
-
-.footer-course {
-  font-size: 0.9rem;
-  color: rgba(212, 200, 188, 0.7);
-  margin-top: 8px;
-}
-
-.footer-members {
-  font-size: 0.85rem;
-  color: rgba(212, 200, 188, 0.7);
-  margin-top: 4px;
-}
-
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 28px;
-}
-
+.footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; text-align: center; }
+.footer-brand { margin-bottom: 28px; }
+.footer-logo-img { height: 72px; width: auto; object-fit: contain; margin: 0 auto; background: none; padding: 8px 16px; border-radius: 8px; filter: brightness(0) invert(1); }
+.footer-course { font-size: 0.9rem; color: rgba(212, 200, 188, 0.7); margin-top: 8px; }
+.footer-members { font-size: 0.85rem; color: rgba(212, 200, 188, 0.7); margin-top: 4px; }
+.footer-social { display: flex; justify-content: center; gap: 24px; margin-bottom: 28px; }
 .social-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: rgba(212, 200, 188, 0.7);
-  font-size: 0.85rem;
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  transition: all 0.3s;
+  display: flex; align-items: center; gap: 8px; color: rgba(212, 200, 188, 0.7); font-size: 0.85rem; padding: 8px 16px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; transition: all 0.3s;
 }
-.social-link:hover {
-  color: #FCDCB4;
-  border-color: rgba(252, 220, 180, 0.4);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.social-link svg {
-  width: 18px;
-  height: 18px;
-}
-
-.footer-bottom {
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.footer-bottom p {
-  font-size: 0.75rem;
-  color: rgba(212, 200, 188, 0.5);
-  letter-spacing: 1px;
-}
+.social-link:hover { color: #FCDCB4; border-color: rgba(252, 220, 180, 0.4); background: rgba(255, 255, 255, 0.05); }
+.social-link svg { width: 18px; height: 18px; }
+.footer-bottom { padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.footer-bottom p { font-size: 0.75rem; color: rgba(212, 200, 188, 0.5); letter-spacing: 1px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .core-areas {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .budget-grid {
-    grid-template-columns: 1fr;
-  }
-  .dual-track {
-    grid-template-columns: 1fr;
-  }
-  .religion-lifecycle {
-    flex-direction: column;
-  }
-  .compare-table {
-    grid-template-columns: 1fr;
-  }
-  .religion-spots-grid {
-    grid-template-columns: 1fr;
-  }
-  .religion-hero-card {
-    padding: 28px 24px;
-  }
-  .religion-section {
-    padding: 24px 20px;
-  }
+  .core-areas { grid-template-columns: repeat(3, 1fr); }
+  .budget-grid { grid-template-columns: 1fr; }
+  .dual-track { grid-template-columns: 1fr; }
+  .religion-lifecycle { flex-direction: column; }
+  .compare-table { grid-template-columns: 1fr; }
+  .religion-spots-grid { grid-template-columns: 1fr; }
+  .religion-hero-card { padding: 28px 24px; }
+  .religion-section { padding: 24px 20px; }
 }
 
-/* ---------- Responsive: 手機端深度優化 ---------- */
+/* ---------- Responsive: 手機端深度優化 (包含選單與動畫) ---------- */
 @media (max-width: 640px) {
-  /* 1. 基礎容器與間距調整 */
   .container { padding: 0 16px; }
   .section { padding: 60px 0; }
-
-  /* 2. 標題與導航列優化 */
   .hero-title { font-size: 2.2rem; }
   .logo-text { font-size: 1.1rem; }
   
+  /* 手機版導航列：平滑下拉動畫設定 */
   .main-nav {
-    display: none;
+    display: flex;
     position: absolute;
     top: var(--header-h);
     left: 0;
@@ -1793,59 +1264,64 @@ section[id], .religion-section[id], div[id] {
     gap: 16px;
     border-bottom: 1px solid var(--clr-border);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    
+    /* 動畫初始狀態 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.35s;
   }
-  .main-nav.active { display: flex; }
+  
+  /* 手機版導航列：展開狀態 */
+  .main-nav.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
   .menu-toggle { display: flex; }
+  
+  /* 漢堡按鈕動畫整合 */
+  .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .lang-dropdown { margin-left: auto; margin-right: 12px; }
 
-  /* 3. 核心區域與卡片佈局 */
   .core-areas { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .core-areas .area-card:last-child { grid-column: span 2; }
   .team-grid { grid-template-columns: 1fr; max-width: 280px; margin: 0 auto; }
 
-  /* 4. 地圖體驗優化 (避免過高導致手機端無法正常上下滑動) */
+  /* 地圖與時間軸修正 */
   .map-container { border-radius: 12px; padding: 3px; }
   .map-header { padding: 18px 14px 4px; }
   .map-header h3 { font-size: 1rem; letter-spacing: 0; }
   .map-subtitle { font-size: 0.78rem; text-align: left; }
-  #tokyo-topology-map { height: 420px; /* 降低高度 */ }
-  .home-floating-btn {
-    right: 14px; bottom: 18px;
-    padding: 10px 14px;
-    font-size: 12px;
-  }
-  .map-legend { max-width: 220px; font-size: 11px; padding: 10px; }
-  .map-scale-hint { display: none; }
-
-  /* 5. 時間軸與中心線對齊修正 */
+  #tokyo-topology-map { height: 420px; }
+  .home-floating-btn { right: 14px; bottom: 18px; padding: 10px 14px; font-size: 12px; }
+  
   .day-header { padding: 16px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .day-content { padding: 20px 16px; }
   .timeline { padding-left: 40px; }
-  .timeline::before { left: 14px; /* 完美置中 30px 圖示 (中心點為 15px, 扣除線寬) */ }
+  .timeline::before { left: 14px; }
   .tl-icon { left: -40px; width: 30px; height: 30px; font-size: 0.85rem; }
 
-  /* 6. 主題區塊排版 */
   .religion-hero-card { padding: 24px 20px; }
   .religion-hero-header { flex-direction: column; text-align: center; gap: 12px; }
   .religion-hero-icon { margin: 0 auto; }
   .religion-lifecycle { flex-direction: column; gap: 12px; }
 
-  /* 7. 其他細節 */
   .footer-social { flex-direction: column; align-items: center; }
   .taichi-red, .taichi-black { width: 110px; height: 110px; }
   .quadrant-chart { display: none; }
 }
 
-/* ---------- Responsive: 針對極小螢幕防呆 (< 400px) ---------- */
 @media (max-width: 400px) {
   .hero-title { font-size: 1.8rem; }
   .hero-subtitle { font-size: 1rem; }
   .budget-total .total-val { font-size: 1.5rem; }
-  
-  /* 餐廳推薦在極小螢幕改為直式排列 */
   .tl-reco-item { flex-direction: column; align-items: flex-start; gap: 6px; }
   .tl-reco-text { order: unset; }
-  
   .religion-hero-header h3 { font-size: 1.5rem; }
 }
 
@@ -1853,15 +1329,9 @@ section[id], .religion-section[id], div[id] {
 .fade-in {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger delays for grouped elements */
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 .fade-in.stagger-1 { transition-delay: 0.08s; }
 .fade-in.stagger-2 { transition-delay: 0.16s; }
 .fade-in.stagger-3 { transition-delay: 0.24s; }
