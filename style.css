@@ -1245,10 +1245,37 @@ section[id], .religion-section[id], div[id] {
 
 /* ---------- Responsive: 手機端深度優化 (包含選單與動畫) ---------- */
 @media (max-width: 640px) {
+  /* 1. 調整全域與導覽列比例，釋放垂直空間 */
+  :root {
+    --header-h: 56px;
+  }
   .container { padding: 0 16px; }
   .section { padding: 60px 0; }
-  .hero-title { font-size: 2.2rem; }
-  .logo-text { font-size: 1.1rem; }
+  
+  /* 縮小 Header 內元素，避免佔用過多手機畫面 */
+  .logo-img { height: 32px; padding: 4px 6px; }
+  .logo-text { font-size: 1.05rem; }
+  .lang-btn { padding: 5px 10px; font-size: 0.75rem; }
+  
+  /* 2. Hero 區塊留白與行距優化 (解決視覺擁擠) */
+  .hero-content { padding: 0 20px; }
+  .hero-tag { margin-bottom: 24px; }
+  .hero-title { 
+    font-size: 2rem; 
+    margin-bottom: 16px; 
+    line-height: 1.3; 
+  }
+  .hero-subtitle { 
+    font-size: 1.15rem; 
+    margin-bottom: 32px; /* 加大副標與說明的距離 */
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.9; /* 增加行高，讓文字呼吸 */
+    margin-bottom: 40px; /* 加大與底部按鈕的距離 */
+    padding: 0 10px; /* 避免文字貼齊螢幕邊緣 */
+  }
+  .hero-cta { padding: 12px 32px; }
   
   /* 手機版導航列：平滑下拉動畫設定 */
   .main-nav {
@@ -1317,8 +1344,11 @@ section[id], .religion-section[id], div[id] {
 }
 
 @media (max-width: 400px) {
-  .hero-title { font-size: 1.8rem; }
-  .hero-subtitle { font-size: 1rem; }
+  /* 進一步針對極小螢幕縮小字體，避免跑版 */
+  .hero-title { font-size: 1.7rem; margin-bottom: 12px; }
+  .hero-subtitle { font-size: 1rem; margin-bottom: 24px; }
+  .hero-desc { font-size: 0.9rem; margin-bottom: 32px; }
+  
   .budget-total .total-val { font-size: 1.5rem; }
   .tl-reco-item { flex-direction: column; align-items: flex-start; gap: 6px; }
   .tl-reco-text { order: unset; }
