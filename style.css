@@ -1,4 +1,4 @@
-﻿/* ==========================================
+/* ==========================================
    72H Tokyo Strategic Blueprint - Stylesheet
    Washi Warm / 和紙暖白 Theme
    ========================================== */
@@ -1770,14 +1770,16 @@ section[id], .religion-section[id], div[id] {
   }
 }
 
+/* ---------- Responsive: 手機端深度優化 ---------- */
 @media (max-width: 640px) {
-  .core-areas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .core-areas .area-card:last-child {
-    grid-column: span 2;
-  }
+  /* 1. 基礎容器與間距調整 */
+  .container { padding: 0 16px; }
+  .section { padding: 60px 0; }
 
+  /* 2. 標題與導航列優化 */
+  .hero-title { font-size: 2.2rem; }
+  .logo-text { font-size: 1.1rem; }
+  
   .main-nav {
     display: none;
     position: absolute;
@@ -1785,107 +1787,66 @@ section[id], .religion-section[id], div[id] {
     left: 0;
     right: 0;
     background: rgba(250, 247, 242, 0.98);
+    backdrop-filter: blur(12px);
     flex-direction: column;
     padding: 24px;
     gap: 16px;
     border-bottom: 1px solid var(--clr-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
-  .main-nav.active {
-    display: flex;
-  }
+  .main-nav.active { display: flex; }
+  .menu-toggle { display: flex; }
+  .lang-dropdown { margin-left: auto; margin-right: 12px; }
 
-  .menu-toggle {
-    display: flex;
-  }
+  /* 3. 核心區域與卡片佈局 */
+  .core-areas { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .core-areas .area-card:last-child { grid-column: span 2; }
+  .team-grid { grid-template-columns: 1fr; max-width: 280px; margin: 0 auto; }
 
-  .lang-dropdown {
-    margin-left: auto;
-    margin-right: 12px;
-  }
-
-  .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 280px;
-  }
-
-  .section {
-    padding: 64px 0;
-  }
-
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .taichi-red,
-  .taichi-black {
-    width: 110px;
-    height: 110px;
-  }
-
-  .quadrant-chart {
-    display: none;
-  }
-
-  .map-container {
-    border-radius: 12px;
-    padding: 3px;
-  }
-
-  .map-header {
-    padding: 18px 14px 2px;
-  }
-
-  .map-header h3 {
-    font-size: 1rem;
-    letter-spacing: 0;
-  }
-
-  .map-subtitle {
-    font-size: 0.78rem;
-    text-align: left;
-  }
-
-  #tokyo-topology-map {
-    height: 540px;
-  }
-
+  /* 4. 地圖體驗優化 (避免過高導致手機端無法正常上下滑動) */
+  .map-container { border-radius: 12px; padding: 3px; }
+  .map-header { padding: 18px 14px 4px; }
+  .map-header h3 { font-size: 1rem; letter-spacing: 0; }
+  .map-subtitle { font-size: 0.78rem; text-align: left; }
+  #tokyo-topology-map { height: 420px; /* 降低高度 */ }
   .home-floating-btn {
-    right: 14px;
-    bottom: 18px;
+    right: 14px; bottom: 18px;
     padding: 10px 14px;
-    max-width: calc(100% - 28px);
     font-size: 12px;
   }
+  .map-legend { max-width: 220px; font-size: 11px; padding: 10px; }
+  .map-scale-hint { display: none; }
 
-  .map-legend {
-    max-width: 220px;
-    font-size: 11px;
-    padding: 10px;
-  }
+  /* 5. 時間軸與中心線對齊修正 */
+  .day-header { padding: 16px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .day-content { padding: 20px 16px; }
+  .timeline { padding-left: 40px; }
+  .timeline::before { left: 14px; /* 完美置中 30px 圖示 (中心點為 15px, 扣除線寬) */ }
+  .tl-icon { left: -40px; width: 30px; height: 30px; font-size: 0.85rem; }
 
-  .map-scale-hint {
-    display: none;
-  }
+  /* 6. 主題區塊排版 */
+  .religion-hero-card { padding: 24px 20px; }
+  .religion-hero-header { flex-direction: column; text-align: center; gap: 12px; }
+  .religion-hero-icon { margin: 0 auto; }
+  .religion-lifecycle { flex-direction: column; gap: 12px; }
 
-  .footer-social {
-    flex-direction: column;
-    align-items: center;
-  }
+  /* 7. 其他細節 */
+  .footer-social { flex-direction: column; align-items: center; }
+  .taichi-red, .taichi-black { width: 110px; height: 110px; }
+  .quadrant-chart { display: none; }
+}
 
-  .day-content {
-    padding: 20px 16px;
-  }
-
-  .timeline {
-    padding-left: 40px;
-  }
-
-  .tl-icon {
-    left: -40px;
-    width: 30px;
-    height: 30px;
-    font-size: 0.85rem;
-  }
+/* ---------- Responsive: 針對極小螢幕防呆 (< 400px) ---------- */
+@media (max-width: 400px) {
+  .hero-title { font-size: 1.8rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .budget-total .total-val { font-size: 1.5rem; }
+  
+  /* 餐廳推薦在極小螢幕改為直式排列 */
+  .tl-reco-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .tl-reco-text { order: unset; }
+  
+  .religion-hero-header h3 { font-size: 1.5rem; }
 }
 
 /* ---------- Scroll Animations ---------- */
