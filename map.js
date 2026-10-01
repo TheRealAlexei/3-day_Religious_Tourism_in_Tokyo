@@ -1,38 +1,58 @@
 // ==========================================
-// 72H Tokyo - Interactive Itinerary Map (Ultimate Stable & Responsive Edition)
-// 支援維基共享圖庫無限視角、深色模式與手機端自適應
+// 72H Tokyo - Interactive Itinerary Map (Ultimate Responsive & Clean Edition)
+// 支援維基共享圖庫無限視角、深色模式、全端自適應、修復高度塌陷
 // ==========================================
 
-// --- 1. 動態注入手機端自適應 CSS (修復地圖塌陷問題) ---
+// --- 1. 動態注入全端自適應 CSS (強制修復所有排版與提示問題) ---
 var mapStyles = document.createElement('style');
 mapStyles.innerHTML = `
-  /* 修正：恢復固定高度，把被壓扁的軍用餅乾撐開！ */
-  #tokyo-topology-map { width: 100%; height: 720px; z-index: 1; border-radius: 12px; }
+  /* 🛑 強制撐開地圖高度：支援電腦、平板、手機自適應，不再變成軍用餅乾 */
+  #tokyo-topology-map { 
+      width: 100% !important; 
+      height: 65vh !important;       /* 預設高度為螢幕高度的 65% */
+      min-height: 450px !important;  /* 絕對不能小於 450px */
+      max-height: 750px !important;  /* 最高不超過 750px */
+      z-index: 1 !important; 
+      border-radius: 12px !important; 
+  }
   
-  .popup-img-wrapper { position: relative; width: 100%; height: 140px; background: #222; border-radius: 8px; overflow: hidden; margin-bottom: 8px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
-  .popup-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
-  .popup-img-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #aaa; font-size: 12px; pointer-events: none; }
-  .popup-img-hint { position: absolute; bottom: 6px; right: 6px; background: rgba(0,0,0,0.7); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 4px; pointer-events: none; backdrop-filter: blur(4px); }
+  /* 🖼️ 彈出視窗圖片區塊變大 */
+  .leaflet-popup-content { width: 320px !important; margin: 14px !important; }
+  .popup-img-wrapper { 
+      position: relative; width: 100%; height: 200px; /* 高度拉大 */
+      background: #222; border-radius: 8px; overflow: hidden; 
+      margin-bottom: 12px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); 
+  }
+  .popup-img-wrapper img { position: relative; z-index: 2; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+  
+  /* ✨ 載入中與提示字樣邏輯 */
+  .popup-img-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #bbb; font-size: 13px; font-weight: bold; pointer-events: none; z-index: 1; }
+  
+  .popup-img-hint { 
+      position: absolute; bottom: 8px; right: 8px; z-index: 3;
+      background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; 
+      padding: 4px 8px; border-radius: 4px; pointer-events: none; 
+      backdrop-filter: blur(4px); transition: opacity 0.4s ease;
+  }
+  /* 滑鼠移入圖片時，自動隱藏換視角的提示 */
+  .popup-img-wrapper:hover .popup-img-hint { opacity: 0; }
   
   /* 圖例卡片樣式 */
-  .map-legend-box { background: rgba(30, 30, 30, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-family: sans-serif; font-size: 13px; color: #eee; min-width: 160px; pointer-events: auto; }
+  .map-legend-box { background: rgba(20, 20, 20, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-family: sans-serif; font-size: 13px; color: #eee; min-width: 160px; pointer-events: auto; }
   .map-legend-box b { display: block; margin-bottom: 12px; font-size: 14px; color: #fff; }
   .map-legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   
-  /* 手機端深度自適應 (Max-width: 640px) */
+  /* 📱 平板與手機端自適應 */
+  @media (max-width: 900px) {
+    .leaflet-popup-content { width: 280px !important; }
+    .popup-img-wrapper { height: 180px; }
+  }
   @media (max-width: 640px) {
-    /* 確保手機版地圖依然有足夠高度 */
-    #tokyo-topology-map { height: 480px !important; }
-    
-    /* 縮小 Popup 避免超出螢幕邊界 */
-    .leaflet-popup-content { width: 240px !important; margin: 12px !important; }
-    .popup-img-wrapper { height: 120px; }
-    
-    /* 右上角圖層控制器縮小 */
+    #tokyo-topology-map { height: 65vh !important; min-height: 400px !important; }
+    .leaflet-popup-content { width: 250px !important; margin: 12px !important; }
+    .popup-img-wrapper { height: 150px; }
     .leaflet-control-layers { max-width: 160px; font-size: 12px; }
-    
-    /* 右下角圖例縮小，並拉開與底部的距離避免被切斷 */
-    .leaflet-bottom.leaflet-right { bottom: 20px; right: 10px; transform: scale(0.9); transform-origin: bottom right; }
+    .leaflet-bottom.leaflet-right { bottom: 15px; right: 10px; transform: scale(0.9); transform-origin: bottom right; }
     .map-legend-box { padding: 12px; min-width: 140px; font-size: 11px; }
     .map-legend-box b { font-size: 12px; margin-bottom: 8px; }
   }
@@ -48,9 +68,7 @@ function returnToTokyo() {
   window._tokyoMap.flyTo(tokyoCenter, defaultZoom, { animate: true, duration: 1.35 });
 }
 
-function t(zh, zhs, en, vi, id, ja, ko) {
-  return { 'zh-Hant': zh, 'zh-Hans': zhs, en: en, vi: vi, id: id, ja: ja, ko: ko };
-}
+function t(zh, zhs, en, vi, id, ja, ko) { return { 'zh-Hant': zh, 'zh-Hans': zhs, en: en, vi: vi, id: id, ja: ja, ko: ko }; }
 
 function readMapLang() {
   var lang = document.documentElement.lang || 'zh-Hant';
@@ -60,20 +78,20 @@ function readMapLang() {
   return 'en';
 }
 
-function pick(value, lang) {
-  return value[lang] || value.en || value['zh-Hant'] || '';
-}
+function pick(value, lang) { return value[lang] || value.en || value['zh-Hant'] || ''; }
 
-// --- 2. 核心功能：維基共享資源 (Wikimedia Commons) 隨機圖片引擎 ---
+// --- 2. 維基共享資源 (Wikimedia Commons) 隨機圖片引擎 ---
 window.fetchWikiImage = function(locId, searchKeyword) {
   var imgEl = document.getElementById('img-' + locId);
+  var loadingEl = document.getElementById('loading-' + locId);
   if (!imgEl) return;
   
-  imgEl.style.opacity = '0.3'; 
+  if (loadingEl) loadingEl.style.display = 'block'; // 顯示載入文字
+  imgEl.style.opacity = '0.1'; // 圖片變暗
   
   var url = 'https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=' + 
             encodeURIComponent(searchKeyword) + 
-            '&gsrnamespace=6&gsrlimit=15&prop=imageinfo&iiprop=url&iiurlwidth=400&format=json&origin=*';
+            '&gsrnamespace=6&gsrlimit=15&prop=imageinfo&iiprop=url&iiurlwidth=500&format=json&origin=*'; // 請求寬度拉高至 500px 確保畫質
   
   fetch(url)
     .then(function(res) { return res.json(); })
@@ -90,16 +108,24 @@ window.fetchWikiImage = function(locId, searchKeyword) {
              var randomPage = validPages[Math.floor(Math.random() * validPages.length)];
              imgEl.src = randomPage.imageinfo[0].thumburl;
          } else {
-             imgEl.src = 'https://picsum.photos/400/250?random=' + Math.random();
+             imgEl.src = 'https://picsum.photos/500/300?random=' + Math.random();
          }
        } else {
-         imgEl.src = 'https://picsum.photos/400/250?random=' + Math.random();
+         imgEl.src = 'https://picsum.photos/500/300?random=' + Math.random();
        }
-       imgEl.style.opacity = '1';
+       
+       // 確保圖片真正下載完成後，才消除載入字樣並恢復透明度
+       imgEl.onload = function() {
+           imgEl.style.opacity = '1';
+           if (loadingEl) loadingEl.style.display = 'none';
+       };
     })
     .catch(function(err) {
-       imgEl.src = 'https://picsum.photos/400/250?random=' + Math.random();
-       imgEl.style.opacity = '1';
+       imgEl.src = 'https://picsum.photos/500/300?random=' + Math.random();
+       imgEl.onload = function() {
+           imgEl.style.opacity = '1';
+           if (loadingEl) loadingEl.style.display = 'none';
+       };
     });
 };
 
@@ -184,18 +210,19 @@ document.addEventListener('DOMContentLoaded', function () {
       return L.divIcon({ html: html, className: 'custom-bullet-icon', iconSize: [size, size], iconAnchor: [size/2, size/2], popupAnchor: [0, -size/2] });
     }
 
+    // 渲染彈出視窗：加入了 loading ID 用於精確控制載入字的隱藏
     function popupFor(loc, lang) {
       return '<div class="custom-popup-container" data-locid="' + loc.id + '" data-wikikey="' + loc.wikiKey + '" style="font-family:sans-serif;">' +
         '<div class="popup-img-wrapper" onclick="window.fetchWikiImage(\'' + loc.id + '\', \'' + loc.wikiKey + '\')" style="cursor:pointer;">' +
-           '<div class="popup-img-loading">📷 載入實景中...</div>' +
+           '<div id="loading-' + loc.id + '" class="popup-img-loading">📷 載入實景中...</div>' +
            '<img id="img-' + loc.id + '" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="">' +
            '<div class="popup-img-hint">👆 點擊換視角</div>' +
         '</div>' +
-        '<strong style="display:flex; align-items:center; gap:6px; font-size:15px; color:#222; margin-bottom:4px;">' + 
-          '<span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:' + (colors[loc.type] || colors.landmark) + ';"></span>' + 
+        '<strong style="display:flex; align-items:center; gap:6px; font-size:16px; color:#222; margin-bottom:6px;">' + 
+          '<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:' + (colors[loc.type] || colors.landmark) + ';"></span>' + 
           pick(loc.name, lang) + 
         '</strong>' +
-        '<span style="display:block; font-size:12px; color:#666; line-height: 1.4;">' + pick(loc.summary, lang) + '</span>' +
+        '<span style="display:block; font-size:13px; color:#555; line-height: 1.5;">' + pick(loc.summary, lang) + '</span>' +
       '</div>';
     }
 
