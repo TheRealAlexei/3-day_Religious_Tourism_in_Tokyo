@@ -3,11 +3,12 @@
 // 支援維基共享圖庫無限視角、深色模式與手機端自適應
 // ==========================================
 
-// --- 1. 動態注入手機端自適應 CSS (免改 style.css) ---
+// --- 1. 動態注入手機端自適應 CSS (修復地圖塌陷問題) ---
 var mapStyles = document.createElement('style');
 mapStyles.innerHTML = `
-  /* 地圖與控制項基礎優化 */
-  #tokyo-topology-map { width: 100%; height: 100%; z-index: 1; }
+  /* 修正：恢復固定高度，把被壓扁的軍用餅乾撐開！ */
+  #tokyo-topology-map { width: 100%; height: 720px; z-index: 1; border-radius: 12px; }
+  
   .popup-img-wrapper { position: relative; width: 100%; height: 140px; background: #222; border-radius: 8px; overflow: hidden; margin-bottom: 8px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
   .popup-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
   .popup-img-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #aaa; font-size: 12px; pointer-events: none; }
@@ -20,6 +21,9 @@ mapStyles.innerHTML = `
   
   /* 手機端深度自適應 (Max-width: 640px) */
   @media (max-width: 640px) {
+    /* 確保手機版地圖依然有足夠高度 */
+    #tokyo-topology-map { height: 480px !important; }
+    
     /* 縮小 Popup 避免超出螢幕邊界 */
     .leaflet-popup-content { width: 240px !important; margin: 12px !important; }
     .popup-img-wrapper { height: 120px; }
@@ -65,9 +69,8 @@ window.fetchWikiImage = function(locId, searchKeyword) {
   var imgEl = document.getElementById('img-' + locId);
   if (!imgEl) return;
   
-  imgEl.style.opacity = '0.3'; // 點擊時變半透明，呈現載入中
+  imgEl.style.opacity = '0.3'; 
   
-  // 呼叫維基官方 API 搜尋圖片 (安全、開源、免金鑰)
   var url = 'https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=' + 
             encodeURIComponent(searchKeyword) + 
             '&gsrnamespace=6&gsrlimit=15&prop=imageinfo&iiprop=url&iiurlwidth=400&format=json&origin=*';
@@ -77,7 +80,6 @@ window.fetchWikiImage = function(locId, searchKeyword) {
     .then(function(data) {
        if (data.query && data.query.pages) {
          var pages = Object.values(data.query.pages);
-         // 過濾掉 SVG 或 PDF，只保留真實照片
          var validPages = pages.filter(function(p) { 
              return p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl && 
                     !p.imageinfo[0].thumburl.toLowerCase().endsWith('.svg.png') &&
@@ -85,7 +87,6 @@ window.fetchWikiImage = function(locId, searchKeyword) {
          });
          
          if (validPages.length > 0) {
-             // 隨機抽取一張圖片，實現「切換視角」功能
              var randomPage = validPages[Math.floor(Math.random() * validPages.length)];
              imgEl.src = randomPage.imageinfo[0].thumburl;
          } else {
@@ -139,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
       en: { shrine: 'S', temple: 'T', base: 'B', transit: 'M', food: 'F', landmark: 'L' }
     };
 
-    // 關鍵字已優化為英文，以確保維基圖庫能精準搜尋到最多照片
     var locations = [
       { id: 'nrt', coords: [35.7719, 140.3929], type: 'transit', dayKey: 'day1day3', wikiKey: 'Narita International Airport', name: t('成田機場 NRT', '成田机场 NRT', 'Narita Airport NRT'), summary: t('Skyliner 高速門戶。') },
       { id: 'nippori', coords: [35.7278, 139.7708], type: 'transit', dayKey: 'day1day3', wikiKey: 'Nippori Station', name: t('日暮里站', '日暮里站', 'Nippori Sta.'), summary: t('轉乘節點。') },
@@ -184,12 +184,10 @@ document.addEventListener('DOMContentLoaded', function () {
       return L.divIcon({ html: html, className: 'custom-bullet-icon', iconSize: [size, size], iconAnchor: [size/2, size/2], popupAnchor: [0, -size/2] });
     }
 
-    // 渲染帶有維基圖庫切換機制的 HTML
     function popupFor(loc, lang) {
       return '<div class="custom-popup-container" data-locid="' + loc.id + '" data-wikikey="' + loc.wikiKey + '" style="font-family:sans-serif;">' +
         '<div class="popup-img-wrapper" onclick="window.fetchWikiImage(\'' + loc.id + '\', \'' + loc.wikiKey + '\')" style="cursor:pointer;">' +
            '<div class="popup-img-loading">📷 載入實景中...</div>' +
-           // 初始使用透明像素佔位，等待 popupopen 事件觸發維基圖片載入
            '<img id="img-' + loc.id + '" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="">' +
            '<div class="popup-img-hint">👆 點擊換視角</div>' +
         '</div>' +
@@ -215,14 +213,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // 綁定 Popup 開啟事件：當視窗打開時，才去呼叫維基 API 載入圖片 (節省頻寬、確保圖片新鮮)
     map.on('popupopen', function(e) {
        var container = e.popup.getElement().querySelector('.custom-popup-container');
        if (container) {
            var locId = container.getAttribute('data-locid');
            var wikiKey = container.getAttribute('data-wikikey');
            var imgEl = document.getElementById('img-' + locId);
-           // 如果圖片還是預設的透明佔位圖，就觸發載入
            if (imgEl && imgEl.src.indexOf('data:image/gif') !== -1) {
                window.fetchWikiImage(locId, wikiKey);
            }
@@ -256,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // 渲染圖例，套用上述建立的 .map-legend-box 樣式
     function updateLegend(lang) {
       if (!legendNode) return;
       var heading = pick({ 'zh-Hant': '72 小時路線圖例', 'zh-Hans': '72 小时路线图例', en: 'Map Legend' }, lang);
